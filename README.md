@@ -8,7 +8,7 @@ This repo contains personal skill files for customizing how Claude behaves acros
 
 ## Projects
 
-### [ContainerUpgrade](./ContainerUpgrade)
+### [Container Upgrade](./Container%20Upgrade)
 A Claude skill loaded with full project context for Mick's off-grid shipping container lake home at Land Between the Lakes, Dover, Tennessee. Answers design and construction questions, assists with expansion planning and phase sequencing, helps navigate septic permitting, and generates Facebook posts about the build in Mick's voice.
 
 ### [Facebook Post](./Facebook%20Post)
@@ -19,6 +19,9 @@ A Claude skill for writing replies to Facebook comments. Triggered by typing `fb
 
 ### [Fitness](./Fitness)
 A Claude skill for tracking workouts, logging fitness progress, and generating Facebook posts from session data. Triggered by typing `fit` or `workout`. Handles workout logging, PR tracking, program adjustments, and progress summaries against baseline numbers.
+
+### [Obsidian Workout Data](./Obsidian%20Workout%20Data)
+A Claude skill for exporting logged workout sessions into Obsidian-ready Markdown files. Triggered by typing `owd`. Reads workout data from the current conversation and writes a formatted `.md` file named after the session date, ready to drop into an Obsidian WorkoutData vault folder.
 
 ### [Rename Pictures](./Rename%20Pictures)
 A Claude skill that renames photos to descriptive real-world names using AI vision, GPS metadata, and web search. Triggered by typing `rp` with attached photos. Converts generic filenames like `IMG_4821.jpg` into descriptive names like `phantom_ranch_grand_canyon.jpg` using a multi-layered identification approach.
