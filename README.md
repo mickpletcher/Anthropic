@@ -29,6 +29,9 @@ A Claude skill for writing posts for X (formerly Twitter) on tech, PowerShell, I
 ### [X Reply](./X%20Reply)
 A Claude skill for writing replies to replies on X. Triggered by typing `xr` followed by the reply being responded to. Tone adjusts automatically based on whether the reply is supportive, a question, skeptical, or bad faith. Every response fits within 280 characters.
 
+### [CLAUDE.md](./CLAUDE.md)
+Guidance file for Claude Code. Documents repo structure, skill packaging workflow, frontmatter format, all skill trigger shortcuts, and the cross-skill voice rules. Read automatically by Claude Code when working in this repo.
+
 ## Structure
 
 Each project lives in its own folder containing a `SKILL.md` file with the skill instructions, a `README.md` with usage documentation, a `PackSkill.ps1` script to package the skill, and a `skill.zip` distributable where applicable.
