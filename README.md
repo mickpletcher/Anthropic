@@ -1,54 +1,135 @@
-# Anthropic
+# mickpletcher/Anthropic
 
-Claude AI skill definitions, custom behaviors, and automation workflows built for use with the Anthropic Claude platform.
+Claude AI skill definitions, custom behaviors, and automation workflows built for use with the Anthropic Claude platform via VS Code.
 
-## What's in here
+## Overview
 
-This repo contains personal skill files for customizing how Claude behaves across different tasks. Skills are written in Markdown and loaded into the Claude platform to define custom workflows, writing styles, and automation behaviors.
+This repository contains a personal library of Claude skills — structured instruction sets that teach Claude how to behave in specific contexts. Each skill is a `.skill` file (zip archive) containing a `SKILL.md` definition and optional reference files. Skills are installed into Claude Desktop and activate automatically when the right context is detected.
 
-## Projects
+Skills are organized around three areas: **content creation**, **technical automation**, and **infrastructure and project work**.
 
-### [Container Upgrade](./Container%20Upgrade)
-A Claude skill loaded with full project context for Mick's off-grid shipping container lake home at Land Between the Lakes, Dover, Tennessee. Answers design and construction questions, assists with expansion planning and phase sequencing, helps navigate septic permitting, and generates Facebook posts about the build in Mick's voice.
+---
 
-### [Facebook Post](./Facebook%20Post)
-A Claude skill for writing and polishing Facebook posts. Triggered by typing `fbp` followed by a draft or topic. Produces direct, first-person posts with no emojis, no hyphens or em dashes, and 2 to 3 hashtags. Output is ready to copy and paste directly into Facebook.
+## Skills
 
-### [Facebook Reply](./Facebook%20Reply)
-A Claude skill for writing replies to Facebook comments. Triggered by typing `fbr` followed by the comment being responded to. Tone adjusts automatically based on whether the comment is supportive, a question, or pushback. Output is the reply text only, ready to paste directly into Facebook.
+### Content Creation
 
-### [Fitness](./Fitness)
-A Claude skill for tracking workouts, logging fitness progress, and generating Facebook posts from session data. Triggered by typing `fit` or `workout`. Handles workout logging, PR tracking, program adjustments, and progress summaries against baseline numbers.
+| Skill | Trigger | Description |
+|-------|---------|-------------|
+| [blog-post](./skills/blog-post/) | `blog post about...` | Writes posts for mickitblog.blogspot.com in Mick's exact voice — direct, first-person, problem-first, practitioner-focused |
+| [linkedin-post](./skills/linkedin-post/) | `linkedin post about...` | Writes professional LinkedIn posts for IT, AI, and automation audiences — polished but never corporate |
+| [facebook-post](./skills/facebook-post/) | `fbp` | Writes Facebook posts — casual, first-person, no emojis, 2 to 3 hashtags |
+| [facebook-reply](./skills/facebook-reply/) | `fbr` | Writes replies to Facebook comments on existing posts |
+| [x-post](./skills/x-post/) | `xp` | Writes X posts under 280 characters — no emojis, no em dashes, 2 to 3 hashtags |
+| [x-reply](./skills/x-reply/) | `xr` | Writes replies to X threads |
+| [website-content](./skills/website-content/) | Context-based | Writes and updates personal website copy across all sections — bio, projects, skills, AI showcase, health/sports, SEO |
 
-### [Obsidian Workout Data](./Obsidian%20Workout%20Data)
-A Claude skill for exporting logged workout sessions into Obsidian-ready Markdown files. Triggered by typing `owd`. Reads workout data from the current conversation and writes a formatted `.md` file named after the session date, ready to drop into an Obsidian WorkoutData vault folder.
+### Technical Automation
 
-### [Rename Pictures](./Rename%20Pictures)
-A Claude skill that renames photos to descriptive real-world names using AI vision, GPS metadata, and web search. Triggered by typing `rp` with attached photos. Converts generic filenames like `IMG_4821.jpg` into descriptive names like `phantom_ranch_grand_canyon.jpg` using a multi-layered identification approach.
+| Skill | Trigger | Description |
+|-------|---------|-------------|
+| [powershell-automation](./skills/powershell-automation/) | Context-based | Writes enterprise PowerShell scripts for SCCM, Intune, Azure AD, and Active Directory — enforces Mick's header format, CMTrace logging, strict error handling, and parameter validation |
+| [alpaca-trading](./skills/alpaca-trading/) | Context-based | Builds and extends algorithmic trading scripts against the Alpaca API — PowerShell-first, five-module repo structure, mandatory live trading guards |
+| [n8n-workflow](./skills/n8n-workflow/) | Context-based | Designs n8n automation workflows — pre-loaded with Mick's Proxmox instance, Claude API node config, and Cloudflare Tunnel patterns |
+| [mcp-builder](./skills/mcp-builder/) | Context-based | Builds MCP (Model Context Protocol) servers — Python/FastMCP primary, includes Proxmox deployment, Cloudflare Tunnel config, and PowerShell client patterns |
 
-### [X Post](./X%20Post)
-A Claude skill for writing posts for X (formerly Twitter) on tech, PowerShell, IT automation, and fitness topics. Triggered by typing `xp` followed by a draft or topic. Produces a single post within 280 characters with a character count shown, 2 to 3 hashtags, and no emojis or em dashes.
+### Infrastructure & Project Work
 
-### [X Reply](./X%20Reply)
-A Claude skill for writing replies to replies on X. Triggered by typing `xr` followed by the reply being responded to. Tone adjusts automatically based on whether the reply is supportive, a question, skeptical, or bad faith. Every response fits within 280 characters.
+| Skill | Trigger | Description |
+|-------|---------|-------------|
+| [proxmox-lxc](./skills/proxmox-lxc/) | Context-based | Generates full LXC container deployment stacks from a service name and IP — pct create, systemd unit file, Cloudflare Tunnel config entry |
+| [container-home](./skills/container-home/) | Context-based | Generates Obsidian-formatted documentation for the off-grid container home build in Stewart County, TN — structural, solar, welding, plumbing, and work session logs |
 
-### [CLAUDE.md](./CLAUDE.md)
-Guidance file for Claude Code. Documents repo structure, skill packaging workflow, frontmatter format, all skill trigger shortcuts, and the cross-skill voice rules. Read automatically by Claude Code when working in this repo.
+### Fitness & Tracking
 
-## Structure
+| Skill | Trigger | Description |
+|-------|---------|-------------|
+| [fitness-log](./skills/fitness-log/) | `fit` or `workout` | Logs workout sessions, tracks PRs, and generates Facebook posts from training data |
+| [obsidian-workout-export](./skills/obsidian-workout-export/) | `owd` | Exports workout data to Obsidian-formatted Markdown |
 
-Each project lives in its own folder containing a `SKILL.md` file with the skill instructions, a `README.md` with usage documentation, a `PackSkill.ps1` script to package the skill, and a `skill.zip` distributable where applicable.
+---
 
-## How it works
+## Installation
 
-Each skill lives in its own folder with a `SKILL.md` file. The file contains a `name` and `description` followed by instructions Claude uses when that skill is triggered. Skills are loaded into the Claude platform, which makes it easy to version control, iterate, and share them.
+### Prerequisites
 
-## Usage
+- [Claude Desktop](https://claude.ai/download) installed
+- Skills directory created at `C:\Users\{username}\OneDrive\Documents\Claude\Skills\`
 
-```bash
-git clone https://github.com/mickpletcher/Anthropic.git
+### Quick Install
+
+1. Download the `.skill` files from this repo
+2. Place them in your Downloads folder
+3. Run the install script:
+
+```powershell
+powershell.exe -ExecutionPolicy Bypass -File Initialize-ClaudeSkills.ps1
 ```
 
-## Author
+The script creates the Skills directory structure, extracts all `.skill` files found in Downloads, and reports what was installed. Restart Claude Desktop after running.
 
-Mick Pletcher — Automation Engineer, Nashville PowerShell User Group co-founder, off-grid container home builder.
+### Manual Install
+
+Each `.skill` file is a zip archive. Extract the contents into:
+
+```
+C:\Users\{username}\OneDrive\Documents\Claude\Skills\user\{skill-name}\
+```
+
+Restart Claude Desktop to load.
+
+---
+
+## Repository Structure
+
+```
+Anthropic/
+├── README.md
+├── Initialize-ClaudeSkills.ps1     ← Install script
+└── skills/
+    ├── alpaca-trading/
+    │   ├── SKILL.md
+    │   └── README.md
+    ├── blog-post/
+    │   ├── SKILL.md
+    │   └── README.md
+    ├── container-home/
+    │   ├── SKILL.md
+    │   └── README.md
+    ├── linkedin-post/
+    │   ├── SKILL.md
+    │   └── README.md
+    ├── mcp-builder/
+    │   ├── SKILL.md
+    │   ├── README.md
+    │   └── reference/
+    ├── n8n-workflow/
+    │   ├── SKILL.md
+    │   └── README.md
+    ├── powershell-automation/
+    │   ├── SKILL.md
+    │   ├── README.md
+    │   └── reference/
+    ├── proxmox-lxc/
+    │   ├── SKILL.md
+    │   └── README.md
+    └── website-content/
+        ├── SKILL.md
+        ├── README.md
+        └── reference/
+```
+
+---
+
+## Related Repositories
+
+| Repo | Description |
+|------|-------------|
+| [mickpletcher/Alpaca](https://github.com/mickpletcher/Alpaca) | Algorithmic trading stack — backtesting, paper trading, live trading, trade journal, AI coaching |
+| [mickpletcher/SafeSend](https://github.com/mickpletcher/SafeSend) | SafeSend API and webhook integration framework |
+
+---
+
+## Blog
+
+Technical posts about automation, enterprise IT, and AI infrastructure at [mickitblog.blogspot.com](https://mickitblog.blogspot.com).
