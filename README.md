@@ -6,6 +6,8 @@ Claude AI skill definitions, custom behaviors, and automation workflows built fo
 
 This repository contains a personal library of Claude skills, structured instruction sets that teach Claude how to behave in specific contexts. Most skill folders include `skill.md` and `README.md`, and some also include a packaged `.skill` artifact. Skills are installed into Claude Desktop and activate automatically when the right context is detected.
 
+All content in this repository is personal work. It is not sourced from, connected to, or representative of any employer systems, data, or internal processes.
+
 Skills are organized around three areas: **content creation**, **technical automation**, and **infrastructure and project work**.
 
 ---
