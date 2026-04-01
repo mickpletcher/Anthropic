@@ -38,7 +38,7 @@ This skill activates when you mention any of the following:
 ```
 container-home/
 ├── README.md       ← this file
-└── SKILL.md        ← skill instructions loaded by Claude
+└── skill.md        ← skill instructions loaded by Claude
 ```
 
 ## Version History

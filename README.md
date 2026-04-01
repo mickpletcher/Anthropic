@@ -121,6 +121,34 @@ Anthropic/
 
 ---
 
+## Skill Folder Conventions
+
+Use this contract for any packaged skill folder in this repository.
+
+Required files:
+1. `README.md`
+2. `skill.md`
+3. `PackSkill.ps1`
+
+Output artifact:
+1. `skill.zip`
+
+Validation commands:
+
+```powershell
+pwsh -NoProfile -File .\scripts\Validate-SkillFolders.ps1
+```
+
+```powershell
+pwsh -NoProfile -File .\scripts\Validate-SkillFolders.ps1 -FailOnIssues -RepairHints
+```
+
+CI checks:
+1. Skill folder validation workflow
+2. Markdown link check workflow
+
+---
+
 ## Related Repositories
 
 | Repo | Description |

@@ -10,7 +10,7 @@ It produces:
 ## Skill File
 
 Primary skill definition:
-* `pihole-csv-analyzer.md`
+* `skill.md`
 
 Packaging script in this folder expects `skill.md`.
 

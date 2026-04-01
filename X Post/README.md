@@ -80,5 +80,5 @@ Post:
 
 ## Related Skills
 
-- [facebook-post](../facebook-post/README.md) — Write Facebook posts using the `fbp` trigger
-- [facebook-reply](../facebook-reply/README.md) — Write Facebook comment replies using the `fbr` trigger
+- [facebook-post](../Facebook%20Post/README.md) — Write Facebook posts using the `fbp` trigger
+- [facebook-reply](../Facebook%20Reply/README.md) — Write Facebook comment replies using the `fbr` trigger

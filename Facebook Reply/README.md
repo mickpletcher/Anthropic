@@ -67,4 +67,4 @@ Reply: "Maybe. Property taxes are $400 a year and I own it outright. That trades
 
 ## Related Skills
 
-- [facebook-post](../facebook-post/README.md) — Write and polish original Facebook posts using the `fbp` trigger
+- [facebook-post](../Facebook%20Post/README.md) — Write and polish original Facebook posts using the `fbp` trigger
