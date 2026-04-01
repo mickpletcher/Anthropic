@@ -6,7 +6,7 @@ A Claude AI skill for writing posts for X (formerly Twitter) on tech, PowerShell
 
 Start any message with `xp` to activate this skill. Everything after it is treated as your draft and immediately rewritten into a polished X post.
 
-```
+```text
 xp just automated Intune compliance reporting, cut a 2 hour manual process down to 3 minutes
 xp hit 790 on leg press today, started at 465 three months ago
 xp built the container home frame for the second addition this weekend
@@ -33,7 +33,7 @@ If the post runs over 280 characters, it flags it and automatically provides a t
 ## Topics
 
 | Topic | Hashtag pool |
-|---|---|
+| --- | --- |
 | Tech / PowerShell / IT | #PowerShell #ITAutomation #Intune #Azure #SCCM #EndpointManagement #Microsoft #SysAdmin |
 | Fitness | #StrengthTraining #MuscleBuilding #FitnessProgress #Lifting #NaturalStrength |
 
@@ -46,31 +46,35 @@ If the post runs over 280 characters, it flags it and automatically provides a t
 
 ## Examples
 
-**Tech**
+### Tech
 
 Draft: "just automated Intune compliance reporting, cut a 2 hour manual process down to 3 minutes"
 
 Post:
-```
+
+```text
 Automated Intune compliance reporting across 4,000 endpoints. What took 2 hours manually now runs as a scheduled job in 3 minutes. #PowerShell #ITAutomation
 ```
+
 `[154 / 280 characters]`
 
 ---
 
-**Fitness**
+### Fitness
 
 Draft: "hit 790 on leg press today, started at 465 three months ago"
 
 Post:
-```
+
+```text
 790 lbs on leg press today. Started at 465 three months ago. 75% improvement and still climbing. #StrengthTraining #MuscleBuilding
 ```
+
 `[131 / 280 characters]`
 
 ---
 
-**Bad example**
+### Bad example
 
 "So excited to share that I've been absolutely crushing my fitness goals lately! This journey has been so rewarding! #FitnessJourney #Blessed"
 

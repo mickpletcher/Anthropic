@@ -2,7 +2,8 @@ param(
     [string]$SkillDir,
     [string]$Root = (Get-Location).Path,
     [switch]$All,
-    [switch]$WhatIf
+    [switch]$WhatIf,
+    [switch]$SelfTest
 )
 
 Set-StrictMode -Version Latest
@@ -18,7 +19,7 @@ function Get-RelativePath {
     $target = (Resolve-Path -LiteralPath $TargetPath).Path
 
     if ($target.StartsWith($base, [System.StringComparison]::OrdinalIgnoreCase)) {
-        return $target.Substring($base.Length).TrimStart('\\', '/')
+        return $target.Substring($base.Length).TrimStart([char]'\', [char]'/')
     }
 
     return Split-Path -Path $target -Leaf
@@ -41,8 +42,8 @@ function Get-ReferencedLocalFiles {
     )
 
     foreach ($pattern in $patterns) {
-        $matches = [regex]::Matches($content, $pattern)
-        foreach ($match in $matches) {
+        $regexHits = [regex]::Matches($content, $pattern)
+        foreach ($match in $regexHits) {
             $ref = $match.Groups[1].Value.Trim()
             if ([string]::IsNullOrWhiteSpace($ref)) { continue }
             if ($ref -match '^https?://') { continue }
@@ -61,7 +62,37 @@ function Get-ReferencedLocalFiles {
     return $results
 }
 
-function Pack-SkillFolder {
+function Invoke-SelfTest {
+    param(
+        [string]$RepoRoot
+    )
+
+    $skillFolder = Join-Path $RepoRoot 'PiHole'
+    $skillFile = Join-Path $skillFolder 'skill.md'
+    $rootScript = Join-Path $RepoRoot 'PackSkill.ps1'
+
+    if (-not (Test-Path -LiteralPath $skillFile)) {
+        throw "Self test failed because test input file was not found: $skillFile"
+    }
+
+    if (-not (Test-Path -LiteralPath $rootScript)) {
+        throw "Self test failed because root script was not found: $rootScript"
+    }
+
+    $inside = Get-RelativePath -BasePath $skillFolder -TargetPath $skillFile
+    if ($inside -ne 'skill.md') {
+        throw "Self test failed for in-folder relative path. Expected skill.md but got: $inside"
+    }
+
+    $outside = Get-RelativePath -BasePath $skillFolder -TargetPath $rootScript
+    if ($outside -ne 'PackSkill.ps1') {
+        throw "Self test failed for out-of-folder fallback. Expected PackSkill.ps1 but got: $outside"
+    }
+
+    Write-Host 'Self test passed.'
+}
+
+function Compress-SkillFolder {
     param(
         [string]$FolderPath,
         [switch]$PreviewOnly
@@ -89,8 +120,10 @@ function Pack-SkillFolder {
         return
     }
 
+    # Ensure stale archive is removed before creating a new one.
     if (Test-Path -LiteralPath $outputPath) {
         Remove-Item -LiteralPath $outputPath -Force
+        Write-Host "Removed existing archive at $outputPath"
     }
 
     $folderFull = (Resolve-Path -LiteralPath $FolderPath).Path
@@ -115,6 +148,11 @@ function Pack-SkillFolder {
 
 $rootPath = (Resolve-Path -LiteralPath $Root).Path
 
+if ($SelfTest) {
+    Invoke-SelfTest -RepoRoot $rootPath
+    exit 0
+}
+
 # Default behavior is to package all skills unless a specific folder is supplied.
 if (-not $All -and -not $SkillDir) {
     $All = $true
@@ -131,7 +169,7 @@ if ($All) {
     }
 
     foreach ($folder in $folders) {
-        Pack-SkillFolder -FolderPath $folder.FullName -PreviewOnly:$WhatIf
+        Compress-SkillFolder -FolderPath $folder.FullName -PreviewOnly:$WhatIf
     }
 
     exit 0
@@ -142,4 +180,4 @@ if (-not $SkillDir) {
 }
 
 $resolvedSkillDir = (Resolve-Path -LiteralPath $SkillDir).Path
-Pack-SkillFolder -FolderPath $resolvedSkillDir -PreviewOnly:$WhatIf
+Compress-SkillFolder -FolderPath $resolvedSkillDir -PreviewOnly:$WhatIf

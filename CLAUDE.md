@@ -11,11 +11,13 @@ This is a collection of Claude AI skill definitions. Each skill is a standalone 
 ## Skill Structure
 
 Every skill folder contains:
+
 - `skill.md` — the skill definition loaded into the Claude platform. Has a YAML frontmatter block with `name` and `description`, followed by Markdown instructions.
 - `README.md` — usage documentation for humans.
 - `skill.zip` — the distributable, produced by the root `PackSkill.ps1` script.
 
 Repository root contains:
+
 - `PackSkill.ps1` — PowerShell script that zips `skill.md` plus any locally referenced assets into `skill.zip` for one folder or all folders.
 
 ## Packaging a Skill
@@ -48,7 +50,7 @@ The `description` field controls activation. It should explicitly list the trigg
 ## Skill Triggers (Current Skills)
 
 | Shortcut | Skill | Description |
-|---|---|---|
+| --- | --- | --- |
 | `fbp` | facebook-post | Write/polish Facebook posts |
 | `fbr` | facebook-reply | Write replies to Facebook comments |
 | `fit` / `workout` | fitness-log | Log workouts, track PRs, generate posts |
@@ -77,4 +79,4 @@ When editing a skill, check that any new instruction doesn't contradict these ru
 1. Create a new folder under `Documents\GitHub\Anthropic\`
 2. Create `skill.md` with frontmatter and instructions
 3. Run root `PackSkill.ps1` to generate `skill.zip`
-5. Write a `README.md`
+4. Write a `README.md`

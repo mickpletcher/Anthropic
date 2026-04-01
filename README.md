@@ -15,7 +15,7 @@ Skills are organized around three areas: **content creation**, **technical autom
 ### Content Creation
 
 | Skill | Trigger | Description |
-|-------|---------|-------------|
+| --- | --- | --- |
 | [blog-post](./skills/blog-post/) | `blog post about...` | Writes posts for mickitblog.blogspot.com in Mick's exact voice — direct, first-person, problem-first, practitioner-focused |
 | [linkedin-post](./skills/linkedin-post/) | `linkedin post about...` | Writes professional LinkedIn posts for IT, AI, and automation audiences — polished but never corporate |
 | [facebook-post](./skills/facebook-post/) | `fbp` | Writes Facebook posts — casual, first-person, no emojis, 2 to 3 hashtags |
@@ -27,7 +27,7 @@ Skills are organized around three areas: **content creation**, **technical autom
 ### Technical Automation
 
 | Skill | Trigger | Description |
-|-------|---------|-------------|
+| --- | --- | --- |
 | [powershell-automation](./skills/powershell-automation/) | Context-based | Writes enterprise PowerShell scripts for SCCM, Intune, Azure AD, and Active Directory — enforces Mick's header format, CMTrace logging, strict error handling, and parameter validation |
 | [alpaca-trading](./skills/alpaca-trading/) | Context-based | Builds and extends algorithmic trading scripts against the Alpaca API — PowerShell-first, five-module repo structure, mandatory live trading guards |
 | [n8n-workflow](./skills/n8n-workflow/) | Context-based | Designs n8n automation workflows — pre-loaded with Mick's Proxmox instance, Claude API node config, and Cloudflare Tunnel patterns |
@@ -36,14 +36,14 @@ Skills are organized around three areas: **content creation**, **technical autom
 ### Infrastructure & Project Work
 
 | Skill | Trigger | Description |
-|-------|---------|-------------|
+| --- | --- | --- |
 | [proxmox-lxc](./skills/proxmox-lxc/) | Context-based | Generates full LXC container deployment stacks from a service name and IP — pct create, systemd unit file, Cloudflare Tunnel config entry |
 | [container-home](./skills/container-home/) | Context-based | Generates Obsidian-formatted documentation for the off-grid container home build in Stewart County, TN — structural, solar, welding, plumbing, and work session logs |
 
 ### Fitness & Tracking
 
 | Skill | Trigger | Description |
-|-------|---------|-------------|
+| --- | --- | --- |
 | [fitness-log](./skills/fitness-log/) | `fit` or `workout` | Logs workout sessions, tracks PRs, and generates Facebook posts from training data |
 | [obsidian-workout-export](./skills/obsidian-workout-export/) | `owd` | Exports workout data to Obsidian-formatted Markdown |
 
@@ -72,7 +72,7 @@ The script creates the Skills directory structure, extracts all `.skill` files f
 
 Each `.skill` file is a zip archive. Extract the contents into:
 
-```
+```text
 C:\Users\{username}\OneDrive\Documents\Claude\Skills\user\{skill-name}\
 ```
 
@@ -82,7 +82,7 @@ Restart Claude Desktop to load.
 
 ## Repository Structure
 
-```
+```text
 Anthropic/
 ├── README.md
 ├── Initialize-ClaudeSkills.ps1     ← Install script
@@ -126,13 +126,16 @@ Anthropic/
 Use this contract for any packaged skill folder in this repository.
 
 Required files:
+
 1. `README.md`
 2. `skill.md`
 
 Output artifact:
+
 1. `skill.zip`
 
 Root packaging script:
+
 1. `PackSkill.ps1`
 
 Packaging commands:
@@ -156,6 +159,7 @@ pwsh -NoProfile -File .\scripts\Validate-SkillFolders.ps1 -FailOnIssues -RepairH
 ```
 
 CI checks:
+
 1. Skill folder validation workflow
 2. Markdown link check workflow
 
@@ -164,7 +168,7 @@ CI checks:
 ## Related Repositories
 
 | Repo | Description |
-|------|-------------|
+| --- | --- |
 | [mickpletcher/Alpaca](https://github.com/mickpletcher/Alpaca) | Algorithmic trading stack — backtesting, paper trading, live trading, trade journal, AI coaching |
 | [mickpletcher/SafeSend](https://github.com/mickpletcher/SafeSend) | SafeSend API and webhook integration framework |
 

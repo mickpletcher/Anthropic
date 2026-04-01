@@ -6,11 +6,11 @@ A Claude AI skill for writing replies to Facebook comments. Triggered by typing 
 
 Start any message with `fbr` to activate this skill. Paste the comment you are replying to after it. Include the original post if you want more accurate context, but it is not required.
 
-```
+```text
 fbr That leg press number is insane, great work!
 ```
 
-```
+```text
 fbr post: Hit 790 on leg press today. Started at 465 three months ago.
 comment: What program are you following?
 ```
@@ -24,7 +24,7 @@ Reads the comment, identifies the type, applies the right tone, and generates a 
 ## Comment Types and Tone
 
 | Comment type | Tone | Approach |
-|---|---|---|
+| --- | --- | --- |
 | Positive or supportive | Warm but grounded | Acknowledge without gushing, add a detail or next step |
 | Question about a project | Direct and specific | Answer the actual question with real details, offer to elaborate if needed |
 | Skeptic or pushback | Confident, not defensive | State your position with facts and move on |
@@ -42,21 +42,24 @@ Reads the comment, identifies the type, applies the right tone, and generates a 
 
 ## Examples
 
-**Supportive comment**
+### Supportive comment
+
 > "That leg press number is insane, great work!"
 
 Reply: "Appreciate it. Started at 465 three months ago so the improvement has been real. Still a lot of room to push."
 
 ---
 
-**Question**
+### Question
+
 > "How are you powering the container home off grid?"
 
 Reply: "Solar with battery storage. Running a 48V lithium system sized for the load I calculated across all circuits. Still dialing in the generator backup for extended cloudy stretches."
 
 ---
 
-**Pushback**
+### Pushback
+
 > "You're going to regret building that far out from civilization."
 
 Reply: "Maybe. Property taxes are $400 a year and I own it outright. That trades off a lot."

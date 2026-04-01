@@ -3,6 +3,7 @@
 This skill analyzes Pi-hole CSV exports and returns practical cleanup actions.
 
 It produces:
+
 * A concise in chat analysis
 * A candidate blocklist file
 * A candidate allowlist file
@@ -10,6 +11,7 @@ It produces:
 ## Skill File
 
 Primary skill definition:
+
 * `skill.md`
 
 Packaging script in this folder expects `skill.md`.
@@ -17,6 +19,7 @@ Packaging script in this folder expects `skill.md`.
 ## Trigger Conditions
 
 The skill should trigger when the user:
+
 * Uploads or mentions a Pi-hole CSV file
 * Types `pihole` or `ph analyze`
 * Asks to analyze DNS query data
@@ -37,6 +40,7 @@ If format detection is unclear, it checks early rows and asks for confirmation.
 ## What The Skill Analyzes
 
 For query logs, it computes:
+
 * Total query volume
 * Allowed vs blocked rate
 * Top allowed domains
@@ -54,6 +58,7 @@ For blocklist and adlist exports, it summarizes enabled and disabled list state.
 Blocklist candidates are generated from allowed domains that look suspicious.
 
 The logic looks for:
+
 * Tracking and telemetry style domain patterns
 * Free TLD abuse indicators such as `.tk`, `.cf`, `.gq`, `.ml`
 * IP like subdomain patterns
@@ -109,15 +114,18 @@ Status codes can expand over time with new Pi-hole releases. When in doubt, conf
 ## Output Files
 
 The skill always creates both files:
+
 * `blocklist_candidates.txt`
 * `allowlist_candidates.txt`
 
 Expected destination:
+
 * `/mnt/user-data/outputs/`
 
 ## In Chat Output
 
 The skill returns a structured summary with:
+
 * Overview metrics
 * Top allowed and blocked domains
 * Top clients
@@ -129,6 +137,7 @@ The skill returns a structured summary with:
 ## Edge Case Handling
 
 The skill handles:
+
 * Empty or malformed CSV files
 * Exports with no blocked queries
 * No suspicious domain scenarios
@@ -235,12 +244,15 @@ Use this as a reference for what a good analysis cycle looks like.
 ### Example input
 
 File name:
+
 * `query-log-7days.csv`
 
 Detected type:
+
 * Query Log
 
 Rows:
+
 * 184320
 
 ### Example prompt
@@ -301,18 +313,21 @@ Safe apply sequence:
 
 Use this when you only have dashboard exports and not full query logs.
 
-### Example input
+### Example input Top Domains
 
 File name:
+
 * `top-domains-24h.csv`
 
 Detected type:
+
 * Top Domains
 
 Rows:
+
 * 100
 
-### Example prompt
+### Example prompt Top Domains
 
 ```text
 Analyze this Top Domains Pi-hole export and suggest likely blocklist candidates.
@@ -346,24 +361,27 @@ How to interpret that:
 
 Use this when you want to find noisy devices fast.
 
-### Example input
+### Example input Top Clients
 
 File name:
+
 * `top-clients-24h.csv`
 
 Detected type:
+
 * Top Clients
 
 Rows:
+
 * 25
 
-### Example prompt
+### Example prompt Top Clients
 
 ```text
 Analyze this Top Clients Pi-hole export and identify query hog devices I should inspect.
 ```
 
-### Example findings
+### Example findings Top Clients
 
 Suppose the skill returns:
 
@@ -379,7 +397,7 @@ How to interpret that:
 3. Overnight spikes usually point to scheduled jobs, retries, or misconfigured apps
 4. Telemetry dominant patterns can often be reduced with targeted domain blocks after testing
 
-### Suggested action flow
+### Suggested action flow Top Clients
 
 1. Map each top client IP to hostname or device owner
 2. Check device update state and DNS settings
@@ -392,6 +410,7 @@ How to interpret that:
 Recommendations are candidates, not automatic policy.
 
 Validate domains before blocking:
+
 * Blocking legitimate auth and update endpoints can break devices and apps
 * High frequency alone is not proof of malicious behavior
 
