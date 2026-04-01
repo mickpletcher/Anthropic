@@ -397,4 +397,4 @@ Validate domains before blocking:
 
 ## Maintenance
 
-If you rename the skill definition file, update `PackSkill.ps1` expectations so packaging still finds the correct markdown file.
+If you rename the skill definition file, keep the name as `skill.md` or update the root `PackSkill.ps1` script expectations.

@@ -5,7 +5,7 @@ param(
 )
 
 $rootPath = (Resolve-Path -LiteralPath $Root).Path
-$requiredFiles = @('README.md', 'skill.md', 'PackSkill.ps1')
+$requiredFiles = @('README.md', 'skill.md')
 
 function Get-RenameSuggestion {
     param(
@@ -19,7 +19,6 @@ function Get-RenameSuggestion {
     switch ($MissingName) {
         'README.md' { $variants = @('Readme.md', 'readme.md') }
         'skill.md' { $variants = @('SKILL.md', 'Skill.md') }
-        'PackSkill.ps1' { $variants = @('PackSkills.ps1') }
         default { $variants = @() }
     }
 
@@ -36,7 +35,6 @@ function Get-RenameSuggestion {
 }
 
 $candidateDirs = Get-ChildItem -LiteralPath $rootPath -Directory | Where-Object {
-    (Test-Path -LiteralPath (Join-Path $_.FullName 'PackSkill.ps1')) -or
     (Test-Path -LiteralPath (Join-Path $_.FullName 'skill.md')) -or
     (Test-Path -LiteralPath (Join-Path $_.FullName 'skill.zip'))
 }

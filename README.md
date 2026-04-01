@@ -128,10 +128,22 @@ Use this contract for any packaged skill folder in this repository.
 Required files:
 1. `README.md`
 2. `skill.md`
-3. `PackSkill.ps1`
 
 Output artifact:
 1. `skill.zip`
+
+Root packaging script:
+1. `PackSkill.ps1`
+
+Packaging commands:
+
+```powershell
+pwsh -NoProfile -File .\PackSkill.ps1 -All
+```
+
+```powershell
+pwsh -NoProfile -File .\PackSkill.ps1 -SkillDir ".\PiHole"
+```
 
 Validation commands:
 

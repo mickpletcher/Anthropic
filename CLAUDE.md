@@ -11,26 +11,28 @@ This is a collection of Claude AI skill definitions. Each skill is a standalone 
 ## Skill Structure
 
 Every skill folder contains:
-- `SKILL.md` — the skill definition loaded into the Claude platform. Has a YAML frontmatter block with `name` and `description`, followed by Markdown instructions.
-- `PackSkill.ps1` — PowerShell script that zips `SKILL.md` plus any locally referenced assets into `skill.zip`. Run it from inside the skill folder or pass `-SkillDir` to point elsewhere.
+- `skill.md` — the skill definition loaded into the Claude platform. Has a YAML frontmatter block with `name` and `description`, followed by Markdown instructions.
 - `README.md` — usage documentation for humans.
-- `skill.zip` — the distributable, produced by `PackSkill.ps1`.
+- `skill.zip` — the distributable, produced by the root `PackSkill.ps1` script.
+
+Repository root contains:
+- `PackSkill.ps1` — PowerShell script that zips `skill.md` plus any locally referenced assets into `skill.zip` for one folder or all folders.
 
 ## Packaging a Skill
 
-Run from within the skill directory:
+Run from repository root to package all skills:
 
 ```powershell
-.\PackSkill.ps1
+pwsh -NoProfile -File .\PackSkill.ps1 -All
 ```
 
-Or from anywhere:
+Package one folder:
 
 ```powershell
-.\PackSkill.ps1 -SkillDir "Documents\GitHub\Anthropic\Facebook Post"
+pwsh -NoProfile -File .\PackSkill.ps1 -SkillDir ".\Facebook Post"
 ```
 
-The script reads `SKILL.md`, finds any locally referenced files (images, linked docs), copies everything into a temp staging folder, then zips it to `skill.zip`. External URLs and anchor links are skipped automatically.
+The script reads `skill.md`, finds any locally referenced files (images, linked docs), copies everything into a temp staging folder, then zips it to `skill.zip`. External URLs and anchor links are skipped automatically.
 
 ## Skill Frontmatter Format
 
@@ -73,7 +75,6 @@ When editing a skill, check that any new instruction doesn't contradict these ru
 ## Adding a New Skill
 
 1. Create a new folder under `Documents\GitHub\Anthropic\`
-2. Create `SKILL.md` with frontmatter and instructions
-3. Copy `PackSkill.ps1` from an existing skill (they're all identical)
-4. Run `PackSkill.ps1` to generate `skill.zip`
+2. Create `skill.md` with frontmatter and instructions
+3. Run root `PackSkill.ps1` to generate `skill.zip`
 5. Write a `README.md`
