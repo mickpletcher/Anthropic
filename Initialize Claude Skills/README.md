@@ -17,10 +17,10 @@ powershell.exe -ExecutionPolicy Bypass -File Initialize-ClaudeSkills.ps1 [parame
 ## Parameters
 
 | Parameter | Type | Description |
-|-----------|------|-------------|
+| --- | --- | --- |
 | `-SkillsRoot` | String | Override the default Skills library path |
 | `-SourcePath` | String | Override the default source path (defaults to Downloads) |
-| `-RepoPath` | String | Path to a cloned copy of the repo — installs from `\skills\` subfolder |
+| `-RepoPath` | String | Path to a cloned copy of a repo that stores `.skill` files in a `\skills\` subfolder |
 | `-SkillName` | String | Target a single skill by name (without `.skill` extension) |
 | `-Remove` | Switch | Remove a skill. Requires `-SkillName` |
 | `-UpdateOnly` | Switch | Only reinstall skills already present. Skips new skills |
@@ -30,36 +30,43 @@ powershell.exe -ExecutionPolicy Bypass -File Initialize-ClaudeSkills.ps1 [parame
 ## Examples
 
 ### Install all skills from Downloads
+
 ```powershell
 .\Initialize-ClaudeSkills.ps1
 ```
 
 ### Install a single skill
+
 ```powershell
 .\Initialize-ClaudeSkills.ps1 -SkillName "powershell-automation"
 ```
 
 ### Install directly from a cloned repo
+
 ```powershell
 .\Initialize-ClaudeSkills.ps1 -RepoPath "C:\Repos\Anthropic"
 ```
 
 ### Update all already-installed skills (skip new ones)
+
 ```powershell
 .\Initialize-ClaudeSkills.ps1 -UpdateOnly
 ```
 
 ### Remove a skill
+
 ```powershell
 .\Initialize-ClaudeSkills.ps1 -Remove -SkillName "blog-post"
 ```
 
 ### See what is currently installed
+
 ```powershell
 .\Initialize-ClaudeSkills.ps1 -List
 ```
 
 ### Dry run — preview changes without applying them
+
 ```powershell
 .\Initialize-ClaudeSkills.ps1 -WhatIf
 ```
@@ -74,13 +81,15 @@ The script resolves the skill source in this order:
 
 If `-RepoPath` is given but the `\skills\` subfolder is not found, the script falls back to Downloads with a warning.
 
+For this repository specifically, skill folders are at the repo root. If you need to install from a local clone, point `-SourcePath` to a folder that contains `.skill` files.
+
 ## Output
 
 New installs are tagged `[NEW]` in green. Updates to existing skills are tagged `[UPDATED]` in cyan. Skipped or failed items are logged in yellow or red. A full list of installed skills is printed at the end of every run.
 
 ## Directory Structure Created
 
-```
+```text
 $env:USERPROFILE\OneDrive\Documents\Claude\Skills\
 ├── user\       ← installed skills live here
 └── public\     ← reserved for public/shared skills

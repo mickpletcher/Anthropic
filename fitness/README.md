@@ -6,7 +6,7 @@ A Claude AI skill for tracking workouts, logging fitness progress, and generatin
 
 Start any message with `fit` or `workout` to activate this skill. Also triggers when mentioning logging a session, hitting a PR, updating stats, or asking about the program or fitness progress.
 
-```
+```text
 fit logged leg press 790 lbs today, 3 sets of 10
 workout hit a new PR on chest press, 185 lbs
 fit how much has my leg press improved since I started?
@@ -18,7 +18,7 @@ This skill handles four primary workflows without asking unnecessary questions u
 
 **Log a workout** — Record exercises, sets, reps, and weights. Acknowledge PRs, flag regressions, and call out anything worth noting such as skipped muscle groups or excessive volume near an injury site.
 
-**Generate a Facebook post** — Write a post from workout data using the same rules as the fbp skill. Direct, first person, no emojis, no hyphens or em dashes, specific numbers up front, 2 to 3 hashtags.
+**Generate a Facebook post** — Write a post from workout data using the same rules as the fbp skill. Direct, first person, no emojis, no hyphens or em dashes, specific numbers up front, up to 6 relevant hashtags when possible.
 
 **Adjust the program** — Suggest exercise swaps or volume changes within safety constraints. Machine alternatives preferred over free weights for any movement with axial loading or shoulder risk.
 
@@ -27,7 +27,7 @@ This skill handles four primary workflows without asking unnecessary questions u
 ## Athlete Profile
 
 | Attribute | Value |
-|---|---|
+| --- | --- |
 | Age | 51 |
 | Bodyweight | 199 lbs |
 | Body fat | 18.7% |
@@ -41,7 +41,7 @@ This skill handles four primary workflows without asking unnecessary questions u
 4-day split, 2-hour sessions, machine-based with some free weights.
 
 | Day | Focus |
-|---|---|
+| --- | --- |
 | Sunday | Upper A — Chest, Back, Shoulders |
 | Monday | Lower A — Quads, Hamstrings, Calves |
 | Tuesday | Upper B — Arms, Back, Delts |
@@ -51,7 +51,7 @@ This skill handles four primary workflows without asking unnecessary questions u
 ## Current PRs
 
 | Exercise | Weight |
-|---|---|
+| --- | --- |
 | Leg Press | 790 lbs |
 | Calf Raise | 1,108 lbs |
 | Chest Press | 180 lbs |
@@ -71,7 +71,7 @@ This skill handles four primary workflows without asking unnecessary questions u
 ## Starting Baseline
 
 | Exercise | Starting Weight |
-|---|---|
+| --- | --- |
 | Leg Press | 465 lbs |
 | Chest Press | 165 lbs |
 | Pull-Ups | 0 reps |
@@ -94,7 +94,7 @@ This skill handles four primary workflows without asking unnecessary questions u
 
 ## Workout Log Format
 
-```
+```text
 Date | Day X — Focus
 - Exercise: weight x sets x reps (PR if applicable)
 - Exercise: weight x sets x reps

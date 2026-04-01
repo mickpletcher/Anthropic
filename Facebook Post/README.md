@@ -6,7 +6,7 @@ A Claude AI skill for writing and polishing Facebook posts. Triggered by typing 
 
 Start any message with `fbp` to activate this skill. Everything after it is treated as your draft and immediately rewritten into a polished post. No clarifying questions asked first.
 
-```
+```text
 fbp just hit 8 pull-ups today, started at zero three months ago
 ```
 
@@ -16,7 +16,7 @@ fbp just hit 8 pull-ups today, started at zero three months ago
 2. Fact-checks anything verifiable against known context
 3. Flags anything that seems off with a note after the post
 4. Rewrites into polished post language without watering down the details
-5. Adds 2 to 3 hashtags based on topic
+5. Adds up to 6 hashtags when possible based on topic
 6. Optionally adds an engagement question at the end
 
 Output is ready to copy and paste directly into Facebook.
@@ -28,14 +28,14 @@ Output is ready to copy and paste directly into Facebook.
 - No quotation marks around words or phrases
 - No bullet points or lists in the post body
 - First person, confident and conversational tone
-- 2 to 3 hashtags maximum
+- Up to 6 hashtags when possible
 
 ## Hashtag Strategy
 
-Facebook rewards fewer, more relevant hashtags. This skill always uses 2 to 3, never more. One broader reach tag plus one or two niche community tags.
+Facebook rewards relevant hashtags over random volume. This skill uses up to 6 when they are directly related to the post, usually one or two broader reach tags and the rest niche community tags.
 
 | Topic | Hashtag pool |
-|---|---|
+| --- | --- |
 | Tech / PowerShell / IT | #PowerShell #Intune #SCCM #Azure #AzureAD #ITAutomation #EndpointManagement #Microsoft |
 | Fitness | #FitnessJourney #StrengthTraining #MuscleBuilding #Triathlon #Cycling #ActiveLifestyle |
 | Container Home / Off-Grid | #ContainerHome #OffGrid #EarlyRetirement #SolarPower #GeographicArbitrage #StewartCountyTN |
@@ -51,21 +51,21 @@ Direct, casual, no fluff. Short sentences. Contractions. Lead with the actual po
 ### Examples
 
 | Draft | Output style |
-|---|---|
+| --- | --- |
 | "Super excited to share this, been working really hard lately!" | "Eight pull-ups from zero in three months. The program is working." |
 | "Just finished a PowerShell script that does some cool automation stuff." | "Finished a PowerShell module that automates Intune device compliance reporting across 4,000 endpoints. Went from a 2-hour manual process to a scheduled job that runs in under 3 minutes." |
 | "The container home is coming along well, really happy with progress!" | "Welded the frame for the second container addition this weekend. Four containers will bring the total footprint to 1,280 square feet, enough to retire on permanently in Stewart County." |
 
 ## Post Structure
 
-```
+```text
 [Lead with the actual point — no warm-up]
 
 [1 to 2 short paragraphs with specific details]
 
 [Optional: one open-ended question that invites a real response]
 
-#Hashtag1 #Hashtag2
+#Hashtag1 #Hashtag2 #Hashtag3 #Hashtag4 #Hashtag5 #Hashtag6
 ```
 
 ## Topic Guidance
