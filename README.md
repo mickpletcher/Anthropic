@@ -136,6 +136,26 @@ pwsh -NoProfile -File .\PackSkill.ps1 -All
 pwsh -NoProfile -File .\PackSkill.ps1 -SkillDir ".\PiHole"
 ```
 
+```powershell
+pwsh -NoProfile -File .\PackSkill.ps1 -All -WhatIf
+```
+
+```powershell
+pwsh -NoProfile -File .\PackSkill.ps1 -SelfTest
+```
+
+Behavior notes:
+
+1. If `-All` and `-SkillDir` are both omitted, the script defaults to packaging all skill folders under the current root recursively.
+2. `-WhatIf` previews packaging actions and does not create `skill.zip` files.
+3. `-SelfTest` runs path helper checks and exits.
+
+Script help:
+
+```powershell
+Get-Help .\PackSkill.ps1 -Full
+```
+
 Validation commands:
 
 ```powershell

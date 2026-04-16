@@ -1,3 +1,45 @@
+<#
+.SYNOPSIS
+Packages one or more Claude skill folders into skill.zip archives.
+
+.DESCRIPTION
+Reads each skill folder's skill.md, discovers local file references, stages the
+referenced files, and creates skill.zip in that folder.
+
+Default behavior packages all folders under Root recursively that contain
+skill.md.
+
+.PARAMETER SkillDir
+Path to a single skill folder to package.
+
+.PARAMETER Root
+Repository root used when scanning for all skill folders.
+
+.PARAMETER All
+When set, package all folders under Root recursively that contain skill.md.
+
+.PARAMETER WhatIf
+Preview mode. Shows what would be packaged without writing zip files.
+
+.PARAMETER SelfTest
+Runs lightweight path handling tests and exits.
+
+.EXAMPLE
+pwsh -NoProfile -File .\PackSkill.ps1 -All
+Packages all skill folders under the current location recursively.
+
+.EXAMPLE
+pwsh -NoProfile -File .\PackSkill.ps1 -SkillDir .\Facebook Post
+Packages one skill folder.
+
+.EXAMPLE
+pwsh -NoProfile -File .\PackSkill.ps1 -All -WhatIf
+Shows packaging actions without creating archives.
+
+.EXAMPLE
+pwsh -NoProfile -File .\PackSkill.ps1 -SelfTest
+Runs self tests for helper path logic.
+#>
 param(
     [string]$SkillDir,
     [string]$Root = (Get-Location).Path,
@@ -9,6 +51,7 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
+# Returns a path relative to BasePath when possible; otherwise returns only the leaf name.
 function Get-RelativePath {
     param(
         [string]$BasePath,
@@ -25,6 +68,7 @@ function Get-RelativePath {
     return Split-Path -Path $target -Leaf
 }
 
+# Parses Markdown and HTML references in skill.md and returns existing local files only.
 function Get-ReferencedLocalFiles {
     param(
         [string]$SkillMarkdownPath,
@@ -62,6 +106,7 @@ function Get-ReferencedLocalFiles {
     return $results
 }
 
+# Runs simple checks for path helper behavior against known files in the repository.
 function Invoke-SelfTest {
     param(
         [string]$RepoRoot
@@ -92,6 +137,7 @@ function Invoke-SelfTest {
     Write-Host 'Self test passed.'
 }
 
+# Stages skill.md plus local referenced files, then creates skill.zip in the skill folder.
 function Compress-SkillFolder {
     param(
         [string]$FolderPath,
@@ -159,9 +205,13 @@ if (-not $All -and -not $SkillDir) {
 }
 
 if ($All) {
-    $folders = Get-ChildItem -LiteralPath $rootPath -Directory | Where-Object {
-        Test-Path -LiteralPath (Join-Path $_.FullName 'skill.md')
+    $skillFiles = Get-ChildItem -LiteralPath $rootPath -Recurse -File | Where-Object {
+        $_.Name -ieq 'skill.md'
     }
+
+    $folders = $skillFiles | ForEach-Object {
+        $_.Directory
+    } | Sort-Object -Property FullName -Unique
 
     if ($folders.Count -eq 0) {
         Write-Warning "No skill folders found under $rootPath"
