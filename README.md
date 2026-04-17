@@ -4,11 +4,11 @@ Claude AI skill definitions, custom behaviors, and automation workflows built fo
 
 ## Overview
 
-This repository contains a personal library of Claude skills, structured instruction sets that teach Claude how to behave in specific contexts. Most skill folders include `skill.md` and `README.md`, and some also include a packaged `.skill` artifact. Skills are installed into Claude Desktop and activate automatically when the right context is detected.
+This repository contains a personal library of Claude skills, structured instruction sets that teach Claude how to behave in specific contexts. The repo currently includes 17 skills. Most skill folders include a source definition file such as `skill.md` or `SKILL.md` plus `README.md`, and some also include a packaged `.skill` or `skill.zip` artifact. Skills are installed into Claude Desktop and activate automatically when the right context is detected.
 
 All content in this repository is personal work. It is not sourced from, connected to, or representative of any employer systems, data, or internal processes.
 
-Skills are organized around three areas: **content creation**, **technical automation**, and **infrastructure and project work**.
+Skills are organized around four areas: **content creation**, **technical automation**, **infrastructure and project work**, and **travel planning**.
 
 ---
 
@@ -33,6 +33,7 @@ Skills are organized around three areas: **content creation**, **technical autom
 | [alpaca-trading](./Alpaca%20Trading/) | Context-based | Builds and extends algorithmic trading scripts against the Alpaca API, PowerShell-first with mandatory live trading guards |
 | [n8n-workflow](./n8n%20Workflow/) | Context-based | Designs n8n automation workflows with Proxmox, Claude API node config, and Cloudflare Tunnel patterns |
 | [pihole](./PiHole/) | Context-based | Provides Pi-hole setup and administration guidance |
+| [pihole-blocklist](./PiHole%20Blocklist/) | Context-based | Evaluates, categorizes, and documents new Pi-hole blocklist sources for the curated blocklist repository |
 | [rename-pictures](./Rename%20Pictures/) | `rp` | Renames photos using metadata, GPS context, and web lookup guidance |
 
 ### Infrastructure & Project Work
@@ -48,6 +49,12 @@ Skills are organized around three areas: **content creation**, **technical autom
 | --- | --- | --- |
 | [fitness-log](./Fitness/) | `fit` or `workout` | Logs workout sessions, tracks PRs, and generates Facebook posts from training data |
 | [obsidian-workout-export](./Obsidian%20Workout%20Data/) | `owd` | Exports workout data to Obsidian formatted Markdown |
+
+### Travel Planning
+
+| Skill | Trigger | Description |
+| --- | --- | --- |
+| [travel-planning](./TravelPlanning/) | Context-based | Plans solo travel itineraries with personalized constraints, active trip references, routing, and budget guidance |
 
 ---
 
@@ -96,12 +103,15 @@ Anthropic/
 ├── Facebook Post/
 ├── Facebook Reply/
 ├── Fitness/
+├── Home Assistant Automation/
 ├── LinkedIn Post/
 ├── n8n Workflow/
 ├── Obsidian Workout Data/
 ├── PiHole/
+├── PiHole Blocklist/
 ├── Proxmox LXC/
 ├── Rename Pictures/
+├── TravelPlanning/
 ├── Website Content/
 ├── X Post/
 └── X Reply/
@@ -111,16 +121,17 @@ Anthropic/
 
 ## Skill Folder Conventions
 
-Use this contract for any packaged skill folder in this repository.
+Use this contract for packaged skill folders in this repository.
 
-Required files:
+Common files:
 
 1. `README.md`
-2. `skill.md`
+2. `skill.md` or `SKILL.md`
 
 Output artifact:
 
 1. `skill.zip`
+2. Some legacy folders also include a packaged `.skill` file
 
 Root packaging script:
 
@@ -170,6 +181,11 @@ CI checks:
 
 1. Skill folder validation workflow
 2. Markdown link check workflow
+
+Current notes:
+
+1. The packaging script scans recursively for `skill.md` files, case insensitive, so both `skill.md` and `SKILL.md` are supported.
+2. Some older folders still use a prebuilt `.skill` artifact in the repo alongside the folder README.
 
 ---
 
