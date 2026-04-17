@@ -47,7 +47,7 @@ Skills are organized around four areas: **content creation**, **technical automa
 
 | Skill | Trigger | Description |
 | --- | --- | --- |
-| [fitness-log](./Fitness/README.md) | `fit` or `workout` | Logs workout sessions, tracks PRs, and generates Facebook posts from training data |
+| [fitness-log](./fitness/README.md) | `fit` or `workout` | Logs workout sessions, tracks PRs, and generates Facebook posts from training data |
 | [obsidian-workout-export](./Obsidian%20Workout%20Data/README.md) | `owd` | Exports workout data to Obsidian formatted Markdown |
 
 ### Travel Planning
@@ -103,7 +103,7 @@ Anthropic/
 ├── Container Upgrade/
 ├── Facebook Post/
 ├── Facebook Reply/
-├── Fitness/
+├── fitness/
 ├── Home Assistant Automation/
 ├── LinkedIn Post/
 ├── n8n Workflow/
