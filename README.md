@@ -4,7 +4,7 @@ Claude AI skill definitions, custom behaviors, and automation workflows built fo
 
 ## Overview
 
-This repository contains a personal library of Claude skills, structured instruction sets that teach Claude how to behave in specific contexts. The repo currently includes 19 skills. Most skill folders include a source definition file such as `skill.md` or `SKILL.md` plus `README.md`, and some also include a packaged `.skill` or `skill.zip` artifact. Skills are installed into Claude Desktop and activate automatically when the right context is detected.
+This repository contains a personal library of Claude skills, structured instruction sets that teach Claude how to behave in specific contexts. The repo currently includes 20 skills. Most skill folders include a source definition file such as `skill.md` or `SKILL.md` plus `README.md`, and some also include a packaged `.skill` or `skill.zip` artifact. Skills are installed into Claude Desktop and activate automatically when the right context is detected.
 
 All content in this repository is personal work. It is not sourced from, connected to, or representative of any employer systems, data, or internal processes.
 
@@ -20,6 +20,7 @@ Skills are organized around four areas: **content creation**, **technical automa
 | --- | --- | --- |
 | [blog-post](./Blog%20Post/README.md) | `blog post about...` | Writes posts for mickitblog.blogspot.com in Mick's exact voice, direct, first-person, problem-first, practitioner-focused |
 | [blog-to-social](./Blog%20To%20Social/README.md) | `bts` | Converts one finished blog post into ready-to-post Facebook, X, and LinkedIn versions in one pass |
+| [github-readme](./GitHub%20Readme/README.md) | `readme` or `gr` | Generates polished, complete README.md files for GitHub repos, tailored by repo type with correct section set and voice |
 | [linkedin-post](./LinkedIn%20Post/README.md) | `linkedin post about...` | Writes professional LinkedIn posts for IT, AI, and automation audiences, polished but never corporate |
 | [facebook-post](./Facebook%20Post/README.md) | `fbp` | Writes Facebook posts, casual, first-person, no emojis, up to 6 relevant hashtags |
 | [facebook-reply](./Facebook%20Reply/README.md) | `fbr` | Writes replies to Facebook comments on existing posts |
@@ -106,6 +107,7 @@ Anthropic/
 ├── Facebook Post/
 ├── Facebook Reply/
 ├── fitness/
+├── GitHub Readme/
 ├── Home Assistant Automation/
 ├── LinkedIn Post/
 ├── n8n Workflow/
