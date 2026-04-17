@@ -4,7 +4,7 @@ Claude AI skill definitions, custom behaviors, and automation workflows built fo
 
 ## Overview
 
-This repository contains a personal library of Claude skills, structured instruction sets that teach Claude how to behave in specific contexts. The repo currently includes 17 skills. Most skill folders include a source definition file such as `skill.md` or `SKILL.md` plus `README.md`, and some also include a packaged `.skill` or `skill.zip` artifact. Skills are installed into Claude Desktop and activate automatically when the right context is detected.
+This repository contains a personal library of Claude skills, structured instruction sets that teach Claude how to behave in specific contexts. The repo currently includes 18 skills. Most skill folders include a source definition file such as `skill.md` or `SKILL.md` plus `README.md`, and some also include a packaged `.skill` or `skill.zip` artifact. Skills are installed into Claude Desktop and activate automatically when the right context is detected.
 
 All content in this repository is personal work. It is not sourced from, connected to, or representative of any employer systems, data, or internal processes.
 
@@ -55,6 +55,7 @@ Skills are organized around four areas: **content creation**, **technical automa
 | Skill | Trigger | Description |
 | --- | --- | --- |
 | [travel-planning](./TravelPlanning/README.md) | Context-based | Plans solo travel itineraries with personalized constraints, active trip references, routing, and budget guidance |
+| [travel-itinerary](./Travel%20Itinerary/README.md) | `trip` or `itinerary` | Builds reusable Obsidian ready itinerary files with logistics, budget, packing list, and open items |
 
 ---
 
@@ -111,6 +112,7 @@ Anthropic/
 ├── PiHole Blocklist/
 ├── Proxmox LXC/
 ├── Rename Pictures/
+├── Travel Itinerary/
 ├── TravelPlanning/
 ├── Website Content/
 ├── X Post/
