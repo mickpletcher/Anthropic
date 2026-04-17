@@ -18,43 +18,43 @@ Skills are organized around four areas: **content creation**, **technical automa
 
 | Skill | Trigger | Description |
 | --- | --- | --- |
-| [blog-post](./Blog%20Post/) | `blog post about...` | Writes posts for mickitblog.blogspot.com in Mick's exact voice, direct, first-person, problem-first, practitioner-focused |
-| [linkedin-post](./LinkedIn%20Post/) | `linkedin post about...` | Writes professional LinkedIn posts for IT, AI, and automation audiences, polished but never corporate |
-| [facebook-post](./Facebook%20Post/) | `fbp` | Writes Facebook posts, casual, first-person, no emojis, up to 6 relevant hashtags |
-| [facebook-reply](./Facebook%20Reply/) | `fbr` | Writes replies to Facebook comments on existing posts |
-| [x-post](./X%20Post/) | `xp` | Writes X posts under 280 characters, no emojis, no em dashes, 2 to 3 hashtags |
-| [x-reply](./X%20Reply/) | `xr` | Writes replies to X threads |
-| [website-content](./Website%20Content/) | Context-based | Writes and updates personal website copy across all sections, bio, projects, skills, AI showcase, health/sports, SEO |
+| [blog-post](./Blog%20Post/README.md) | `blog post about...` | Writes posts for mickitblog.blogspot.com in Mick's exact voice, direct, first-person, problem-first, practitioner-focused |
+| [linkedin-post](./LinkedIn%20Post/README.md) | `linkedin post about...` | Writes professional LinkedIn posts for IT, AI, and automation audiences, polished but never corporate |
+| [facebook-post](./Facebook%20Post/README.md) | `fbp` | Writes Facebook posts, casual, first-person, no emojis, up to 6 relevant hashtags |
+| [facebook-reply](./Facebook%20Reply/README.md) | `fbr` | Writes replies to Facebook comments on existing posts |
+| [x-post](./X%20Post/README.md) | `xp` | Writes X posts under 280 characters, no emojis, no em dashes, 2 to 3 hashtags |
+| [x-reply](./X%20Reply/README.md) | `xr` | Writes replies to X threads |
+| [website-content](./Website%20Content/README.md) | Context-based | Writes and updates personal website copy across all sections, bio, projects, skills, AI showcase, health/sports, SEO |
 
 ### Technical Automation
 
 | Skill | Trigger | Description |
 | --- | --- | --- |
-| [alpaca-trading](./Alpaca%20Trading/) | Context-based | Builds and extends algorithmic trading scripts against the Alpaca API, PowerShell-first with mandatory live trading guards |
-| [n8n-workflow](./n8n%20Workflow/) | Context-based | Designs n8n automation workflows with Proxmox, Claude API node config, and Cloudflare Tunnel patterns |
-| [pihole](./PiHole/) | Context-based | Provides Pi-hole setup and administration guidance |
-| [pihole-blocklist](./PiHole%20Blocklist/) | Context-based | Evaluates, categorizes, and documents new Pi-hole blocklist sources for the curated blocklist repository |
-| [rename-pictures](./Rename%20Pictures/) | `rp` | Renames photos using metadata, GPS context, and web lookup guidance |
+| [alpaca-trading](./Alpaca%20Trading/README.md) | Context-based | Builds and extends algorithmic trading scripts against the Alpaca API, PowerShell-first with mandatory live trading guards |
+| [n8n-workflow](./n8n%20Workflow/README.md) | Context-based | Designs n8n automation workflows with Proxmox, Claude API node config, and Cloudflare Tunnel patterns |
+| [pihole](./PiHole/README.md) | Context-based | Provides Pi-hole setup and administration guidance |
+| [pihole-blocklist](./PiHole%20Blocklist/README.md) | Context-based | Evaluates, categorizes, and documents new Pi-hole blocklist sources for the curated blocklist repository |
+| [rename-pictures](./Rename%20Pictures/README.md) | `rp` | Renames photos using metadata, GPS context, and web lookup guidance |
 
 ### Infrastructure & Project Work
 
 | Skill | Trigger | Description |
 | --- | --- | --- |
-| [proxmox-lxc](./Proxmox%20LXC/) | Context-based | Generates full LXC container deployment stacks from a service name and IP, pct create, systemd unit file, Cloudflare Tunnel config entry |
-| [container-home](./Container%20Upgrade/) | Context-based | Generates Obsidian formatted documentation for the off-grid container home build in Stewart County, TN |
+| [proxmox-lxc](./Proxmox%20LXC/README.md) | Context-based | Generates full LXC container deployment stacks from a service name and IP, pct create, systemd unit file, Cloudflare Tunnel config entry |
+| [container-home](./Container%20Upgrade/README.md) | Context-based | Generates Obsidian formatted documentation for the off-grid container home build in Stewart County, TN |
 
 ### Fitness & Tracking
 
 | Skill | Trigger | Description |
 | --- | --- | --- |
-| [fitness-log](./Fitness/) | `fit` or `workout` | Logs workout sessions, tracks PRs, and generates Facebook posts from training data |
-| [obsidian-workout-export](./Obsidian%20Workout%20Data/) | `owd` | Exports workout data to Obsidian formatted Markdown |
+| [fitness-log](./Fitness/README.md) | `fit` or `workout` | Logs workout sessions, tracks PRs, and generates Facebook posts from training data |
+| [obsidian-workout-export](./Obsidian%20Workout%20Data/README.md) | `owd` | Exports workout data to Obsidian formatted Markdown |
 
 ### Travel Planning
 
 | Skill | Trigger | Description |
 | --- | --- | --- |
-| [travel-planning](./TravelPlanning/) | Context-based | Plans solo travel itineraries with personalized constraints, active trip references, routing, and budget guidance |
+| [travel-planning](./TravelPlanning/README.md) | Context-based | Plans solo travel itineraries with personalized constraints, active trip references, routing, and budget guidance |
 
 ---
 
