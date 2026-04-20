@@ -10,6 +10,8 @@ Enhance Mode now includes deterministic scoring. Each resume is scored against w
 
 JSON output is supported for automation and integrations through `human`, `json`, and `both` response modes.
 
+When a job description or target role is provided, Enhance Mode supports targeted rewrites and targeted scoring context.
+
 The library is curated by the user, so the skill improves as you feed it high signal guidance over time.
 
 ## What This Does
@@ -94,9 +96,16 @@ Critical issues can cap the final verdict even when the numeric score is decent.
 
 ```json
 {
+    "output_mode": "json",
+    "review_context": "targeted",
+    "confidence": "high",
+    "audit_mode": "condensed",
     "final_score": 78,
     "verdict": "Good but inconsistent",
-    "confidence": "high",
+    "hire_likelihood": "Mixed results likely depending on competition and recruiter attention",
+    "critical_issue_count": 1,
+    "major_issue_count": 2,
+    "minor_issue_count": 1,
     "category_scores": {
         "positioning_and_narrative": 82,
         "evidence_and_bullet_strength": 70,
@@ -104,8 +113,6 @@ Critical issues can cap the final verdict even when the numeric score is decent.
         "relevance_and_targeting": 65,
         "professionalism_and_trust": 90
     },
-    "critical_issue_count": 1,
-    "major_issue_count": 2,
     "missing_data_flags": [
         "MISSING_METRIC",
         "MISSING_TARGET_ROLE"
@@ -115,7 +122,7 @@ Critical issues can cap the final verdict even when the numeric score is decent.
     ],
     "top_fixes": [
         "Add measurable outcomes to at least 3 bullets",
-        "Clarify target role in summary"
+        "Clarify target role in the summary"
     ]
 }
 ```

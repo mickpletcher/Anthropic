@@ -33,6 +33,8 @@ Go to the **Add Insight Workflow** section.
 
 Default output mode is `human`.
 
+`json-output-spec.md` is the authoritative contract for machine-readable output.
+
 Switch output mode when user intent indicates automation needs:
 
 - If user asks for automation, API, JSON, machine-readable, structured output, pipeline use, CLI use, n8n use, or parsing, switch to `json` or `both`.
@@ -207,9 +209,11 @@ Deliver seven sections, in this order:
    - Source field must hold either a library principle name or `common-patterns § <section>`.
 
 6. **Rewritten Resume (if requested)**
+   - Include this section when the request is in rewrite mode or the user explicitly requests a rewrite.
    - If input was .docx, produce .docx using the `docx` skill, preserving any letterhead or formatting.
    - If input was .pdf, produce .docx by default.
    - If input was paste or image, produce Markdown unless the user asks for .docx.
+   - In JSON output, map this content to `rewritten_resume`.
 
 7. **Top Fixes / Next Steps**
    - List highest impact improvements first.
@@ -229,6 +233,8 @@ Output mode assembly rules:
 
 Use `scoring-model.md` as the source of truth.
 
+Every resume audit in Enhance mode MUST run this scoring workflow.
+
 1. Determine review context:
    - Generic resume review
    - Targeted resume review (job description or explicit target role provided)
@@ -240,6 +246,7 @@ Use `scoring-model.md` as the source of truth.
    - Apply principle weight from the mapping table.
    - When uncertain between adjacent scores, choose the lower score unless strong evidence supports the higher score.
    - Do not inflate scores due to polished wording alone.
+   - Weak evidence should score lower even if formatting quality is strong.
 
 3. Calculate category scores:
    - Use weighted average per category from `scoring-model.md`.
