@@ -6,6 +6,8 @@ A Claude skill that rewrites resumes using a persistent library of principles ha
 
 Resume Writer runs in two modes. Enhance Mode rewrites resumes and returns a condensed audit by default. Full forensic line by line audit is available on request. Add Insight Mode extracts principles from recruiter or hiring guidance and appends them to the local library for future rewrites.
 
+Enhance Mode now includes deterministic scoring. Each resume is scored against weighted recruiter-sourced principles, with severity and missing data tracked separately from the numeric score.
+
 The library is curated by the user, so the skill improves as you feed it high signal guidance over time.
 
 ## What This Does
@@ -16,8 +18,9 @@ Enhance Mode:
 2. Applies confidence levels based on source quality
 3. Loads principles and common patterns
 4. Produces a full rewrite plus a condensed audit by default
-5. Adds Missing data and Gap Analysis sections
-6. Provides full forensic audit only when explicitly requested
+5. Produces a weighted final score and category breakdown
+6. Adds Missing data and Gap Analysis sections
+7. Provides full forensic audit only when explicitly requested
 
 Add Insight Mode:
 
@@ -41,6 +44,53 @@ Add Insight Mode:
 - Full forensic audit (on request): line by line detail with Location, Source, Before, After.
 
 Both modes include a rewritten resume, Missing data, and Gap Analysis.
+
+## Scoring Model
+
+- Resumes are scored against weighted recruiter-sourced principles.
+- Severity is tracked separately from numeric score.
+- Missing data is tracked separately from weak writing.
+- Low confidence extraction is labeled honestly.
+- Output includes a final score and category breakdown.
+
+The full scoring specification lives in `scoring-model.md`.
+
+## How to Read the Score
+
+- `90 to 100`: Excellent. Resume is competitive with only minor tuning left.
+- `80 to 89`: Strong. Solid interview signal with focused fixes still available.
+- `70 to 79`: Good but inconsistent. Viable, but clear weaknesses reduce consistency.
+- `60 to 69`: Weak. Significant revision needed before broad application.
+- `Below 60`: High risk. Major structural and evidence issues are likely blocking traction.
+
+Critical issues can cap the final verdict even when the numeric score is decent.
+
+## Scored Output Example
+
+```text
+Final Score Summary
+- Final Score: 76.4/100
+- Verdict: Good but inconsistent
+- Hire Likelihood Signal: Possible interview traction if top issues are fixed
+- Confidence: Medium
+- Audit Mode: Condensed
+- Review Context: Targeted
+
+Category Breakdown
+- Positioning and Narrative: 74.0
+- Evidence and Bullet Strength: 69.5
+- ATS and Structural Reliability: 84.0
+- Relevance and Targeting: 71.0
+- Professionalism and Trust: 82.0
+
+Issues by Severity
+- CRITICAL: Target role remains unclear in top third
+- MAJOR: Bullets are mostly responsibility statements without outcomes
+- MAJOR: Skills section lists tools with no experience proof
+
+Missing Data
+- MISSING METRIC: outcome numbers for latest role impact bullets
+```
 
 ## Confidence Levels
 
@@ -138,6 +188,7 @@ What the skill cannot invent:
 resume-writer/
 |-- SKILL.md                  # Skill definition, triggers, and workflows
 |-- README.md                 # This file
+|-- scoring-model.md          # Deterministic scoring definitions and mappings
 |-- insights/
 |   |-- principles.md         # Persistent library of recruiter principles
 |-- references/
@@ -183,6 +234,9 @@ rw add
 
 Enhance Mode output includes:
 
+- Final Score Summary with verdict, hire likelihood signal, confidence, audit mode, and review context
+- Category Breakdown across five weighted categories
+- Issues grouped by severity (CRITICAL, MAJOR, MINOR)
 - A condensed audit by default that groups repeated issues by section
 - A full forensic line by line audit only when explicitly requested
 - The full rewritten resume

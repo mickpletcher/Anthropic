@@ -102,6 +102,15 @@ Be specific. "Weak bullet" is not a valid issue. "No outcome specified — says 
 
 When the same violation maps to both a library principle and a pattern, apply the precedence rule: cite the library principle.
 
+Capture scoring inputs while auditing:
+
+- Principle name
+- Score (`0` to `3`)
+- Severity (`CRITICAL`, `MAJOR`, `MINOR`, `INFO`)
+- Category (from `scoring-model.md`)
+- Principle weight (from `scoring-model.md`)
+- Missing data flag (if present)
+
 ### Step 6: Produce the rewrite
 
 Rewrite the full resume applying all recommended fixes. Preserve:
@@ -136,26 +145,101 @@ If the re-audit surfaces issues, fix them silently before presenting. Do not sho
 
 ### Step 8: Produce the output
 
-Deliver three things, in this order:
+Deliver seven sections, in this order:
 
-1. **Audit** — output level depends on user request:
-   - **Condensed audit (default)**: group repeated issues by section, focus on highest value changes, keep output readable for normal users.
-   - **Full forensic audit (only on explicit request)**: line by line detail with Location | Source | Before | After for each change.
+1. **Final Score Summary**
+   - Final Score
+   - Verdict
+   - Hire Likelihood Signal
+   - Confidence
+   - Audit Mode
+   - Review Context
 
-   Always include:
-   - **Missing data**: specific numbers or details needed from the user.
-   - **Gap Analysis**: likely missing evidence, missing role specific keywords, and missing metrics relative to the target role when one is provided.
+2. **Category Breakdown**
+   - Positioning and Narrative
+   - Evidence and Bullet Strength
+   - ATS and Structural Reliability
+   - Relevance and Targeting
+   - Professionalism and Trust
 
-   The Source field must hold either a library principle name or `common-patterns § <section>`.
+3. **Issues by Severity**
+   - CRITICAL
+   - MAJOR
+   - MINOR
 
-2. **Rewritten resume** — full text, ready to use.
+4. **Missing Data**
+   - MISSING METRIC
+   - MISSING SCOPE
+   - MISSING TARGET ROLE
+   - MISSING TOOL SPECIFICITY
+   - MISSING OUTCOME
+   - MISSING TIMELINE CONTEXT
+
+5. **Audit Findings**
+   - Condensed by default.
+   - Full forensic only when explicitly requested.
+   - Source field must hold either a library principle name or `common-patterns § <section>`.
+
+6. **Rewritten Resume**
    - If input was .docx, produce .docx using the `docx` skill, preserving any letterhead or formatting.
-   - If input was .pdf, produce .docx by default (professional resumes are typically circulated as .docx or PDF, and .docx is the editable handoff the user can tune further).
+   - If input was .pdf, produce .docx by default.
    - If input was paste or image, produce Markdown unless the user asks for .docx.
 
-   If the source is not pasted text, state extraction confidence (High, Medium, or Low) and any parsing limitations.
+7. **Top Fixes / Next Steps**
+   - List highest impact improvements first.
+   - Include missing metrics and follow up items.
+   - Include any "Not-in-library observations".
+   - If any Not-in-library observation recurs, offer to add it as a principle.
 
-3. **Next steps** — a short list: missing metrics to fill in, recommended follow-ups, and anything flagged in "Not-in-library observations." If any Not-in-library observations recur across multiple resumes, offer: "This weakness comes up often but isn't in your library yet. Want to add it as a principle?"
+If source is not pasted text, always state extraction confidence (High, Medium, or Low) and parsing limitations.
+
+## Scoring Workflow
+
+Use `scoring-model.md` as the source of truth.
+
+1. Determine review context:
+   - Generic resume review
+   - Targeted resume review (job description or explicit target role provided)
+   - Low confidence extraction review
+
+2. For each relevant principle:
+   - Assign score from `0` to `3`.
+   - Assign severity independently (`CRITICAL`, `MAJOR`, `MINOR`, `INFO`).
+   - Apply principle weight from the mapping table.
+
+3. Calculate category scores:
+   - Use weighted average per category from `scoring-model.md`.
+
+4. Calculate final score:
+   - Combine category scores using context specific category weights.
+   - Output final score out of 100.
+
+5. Apply verdict bands:
+   - `90 to 100`: Excellent
+   - `80 to 89`: Strong
+   - `70 to 79`: Good but inconsistent
+   - `60 to 69`: Weak
+   - `Below 60`: High risk
+
+6. Apply critical failure overrides:
+   - 1 CRITICAL issue caps verdict at Strong.
+   - 2 CRITICAL issues cap verdict at Good but inconsistent.
+   - 3 or more CRITICAL issues cap verdict at Weak.
+
+7. Handle missing data separately from writing quality:
+   - Track required flags under Missing Data.
+   - Do not treat missing data flags as identical to writing failures.
+
+8. Confidence and mode labeling:
+   - Always label extraction confidence.
+   - Always state whether audit ran in Generic or Targeted mode.
+   - In Low confidence extraction mode, score only trusted text and cap maximum verdict at Strong unless user manually confirms text.
+
+9. Preserve existing core rules:
+   - Library principles take precedence over common patterns when both apply.
+   - Never fabricate metrics.
+   - Preserve factual resume details.
+   - Keep condensed audit default and forensic audit opt in.
 
 ---
 
