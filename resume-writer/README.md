@@ -8,6 +8,8 @@ Resume Writer runs in two modes. Enhance Mode rewrites resumes and returns a con
 
 Enhance Mode now includes deterministic scoring. Each resume is scored against weighted recruiter-sourced principles, with severity and missing data tracked separately from the numeric score.
 
+JSON output is supported for automation and integrations through `human`, `json`, and `both` response modes.
+
 The library is curated by the user, so the skill improves as you feed it high signal guidance over time.
 
 ## What This Does
@@ -90,92 +92,30 @@ Critical issues can cap the final verdict even when the numeric score is decent.
 
 ## Scored Output Example
 
-```text
-Final Score Summary
-- Final Score: 76.4/100
-- Verdict: Good but inconsistent
-- Hire Likelihood Signal: Possible interview traction if top issues are fixed
-- Confidence: Medium
-- Audit Mode: Condensed
-- Review Context: Targeted
-
-Category Breakdown
-- Positioning and Narrative: 74.0
-- Evidence and Bullet Strength: 69.5
-- ATS and Structural Reliability: 84.0
-- Relevance and Targeting: 71.0
-- Professionalism and Trust: 82.0
-
-Issues by Severity
-- CRITICAL: Target role remains unclear in top third
-- MAJOR: Bullets are mostly responsibility statements without outcomes
-- MAJOR: Skills section lists tools with no experience proof
-
-Missing Data
-- MISSING METRIC: outcome numbers for latest role impact bullets
-```
-
-## Scored JSON Example
-
 ```json
 {
-    "output_mode": "json",
-    "review_context": "targeted",
-    "confidence": "medium",
-    "audit_mode": "condensed",
-    "final_score": 74.2,
+    "final_score": 78,
     "verdict": "Good but inconsistent",
-    "hire_likelihood": "Possible interview traction if top issues are fixed",
-    "critical_issue_count": 1,
-    "major_issue_count": 1,
-    "minor_issue_count": 2,
+    "confidence": "high",
     "category_scores": {
-        "positioning_and_narrative": 72.0,
-        "evidence_and_bullet_strength": 69.0,
-        "ats_and_structural_reliability": 84.0,
-        "relevance_and_targeting": 73.0,
-        "professionalism_and_trust": 81.0
+        "positioning_and_narrative": 82,
+        "evidence_and_bullet_strength": 70,
+        "ats_and_structural_reliability": 88,
+        "relevance_and_targeting": 65,
+        "professionalism_and_trust": 90
     },
-    "principle_scores": [
-        {
-            "principle": "Make the target role obvious in the top third",
-            "source_type": "library_principle",
-            "source_name": "Make the target role obvious in the top third",
-            "category": "Positioning and Narrative",
-            "score": 1,
-            "weight": 1.5,
-            "severity": "CRITICAL",
-            "reason": "Target role is not clearly stated near the top.",
-            "before": "Experienced professional with a diverse background.",
-            "after": "Automation engineer focused on endpoint and cloud operations.",
-            "fix": "State the target role and role-fit evidence in the top third."
-        },
-        {
-            "principle": "The bullet formula is verb, work, outcome",
-            "source_type": "library_principle",
-            "source_name": "The bullet formula is verb, work, outcome",
-            "category": "Evidence and Bullet Strength",
-            "score": 1,
-            "weight": 1.5,
-            "severity": "MAJOR",
-            "reason": "Bullets list tasks without outcomes.",
-            "before": "Worked on onboarding processes.",
-            "after": "Built onboarding workflow improvements across 3 teams.",
-            "fix": "Add outcome and measurable impact where available."
-        }
-    ],
+    "critical_issue_count": 1,
+    "major_issue_count": 2,
     "missing_data_flags": [
-        "MISSING_METRIC"
+        "MISSING_METRIC",
+        "MISSING_TARGET_ROLE"
     ],
     "system_flags": [
-        "BULLET_QUALITY_LOW"
+        "METRICS_ABSENT"
     ],
     "top_fixes": [
-        "Lead with a clear target role and rewrite first two role bullets with outcomes."
-    ],
-    "rewritten_resume": null,
-    "notes": [
-        "Rewrite not requested in this example."
+        "Add measurable outcomes to at least 3 bullets",
+        "Clarify target role in summary"
     ]
 }
 ```

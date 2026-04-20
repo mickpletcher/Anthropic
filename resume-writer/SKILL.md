@@ -49,6 +49,7 @@ Hard enforcement rules:
 - In `json` mode, do not use markdown fences.
 - In `json` mode, do not include prose outside the JSON object.
 - In `both` mode, the JSON block must still fully conform to the schema.
+- Do not omit required fields from `json-output-spec.md`.
 - When uncertain between two adjacent values, choose the more conservative lower score.
 - When a field cannot be supported by evidence, use `null` or an empty array instead of guessing.
 
@@ -205,7 +206,7 @@ Deliver seven sections, in this order:
    - Full forensic only when explicitly requested.
    - Source field must hold either a library principle name or `common-patterns § <section>`.
 
-6. **Rewritten Resume**
+6. **Rewritten Resume (if requested)**
    - If input was .docx, produce .docx using the `docx` skill, preserving any letterhead or formatting.
    - If input was .pdf, produce .docx by default.
    - If input was paste or image, produce Markdown unless the user asks for .docx.
@@ -269,7 +270,16 @@ Use `scoring-model.md` as the source of truth.
    - In Low confidence extraction mode, score only trusted text and cap maximum verdict at Strong unless user manually confirms text.
    - Weak extraction confidence must reduce certainty and must not be silently ignored.
 
-9. Populate JSON structure consistently (for `json` and `both` modes):
+9. Mandatory output sections for scored audits:
+   - Final Score Summary
+   - Category Breakdown
+   - Issues by Severity
+   - Missing Data
+   - Audit Findings (condensed by default; forensic only when requested)
+   - Rewritten Resume (if requested)
+   - Top Fixes
+
+10. Populate JSON structure consistently (for `json` and `both` modes):
    - `output_mode`
    - `review_context`
    - `confidence`
@@ -288,13 +298,23 @@ Use `scoring-model.md` as the source of truth.
    - `rewritten_resume`
    - `notes`
 
-10. Bind rewrite output to scoring records:
-   - Every CRITICAL or MAJOR issue should include a fix recommendation.
+11. Bind rewrite output to scoring records:
+   - Every CRITICAL or MAJOR issue MUST include a fix recommendation.
+   - Every CRITICAL or MAJOR issue MUST include an example rewrite when possible.
    - In `json` and `both` modes, populate `principle_scores[].fix` whenever possible.
    - If rewrite output is included, place full rewritten resume in `rewritten_resume`.
    - If no rewrite was requested, set `rewritten_resume` to `null`.
 
-11. Preserve existing core rules:
+12. System flags:
+   - `BULLET_QUALITY_LOW`
+   - `METRICS_ABSENT`
+   - `ATS_RISK_HIGH`
+   - `TARGETING_WEAK`
+   - `TIMELINE_CONFUSING`
+   - `CONTACT_INFO_UNSAFE`
+   - These are cross-principle aggregate signals, not individual issue scores.
+
+13. Preserve existing core rules:
    - Library principles take precedence over common patterns when both apply.
    - Never fabricate metrics.
    - Missing data must not be fabricated to improve scores.
