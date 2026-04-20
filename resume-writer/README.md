@@ -15,7 +15,7 @@ Enhance Mode workflow:
 1. Detects the resume format and extracts text
 2. Loads every principle from the insights library
 3. Audits every bullet, section, and structural choice against the library
-4. Produces a full rewrite and an itemized audit table showing what changed and why
+4. Produces a full rewrite and a condensed audit by default, with full forensic detail only when requested
 5. Flags any missing metrics the user should supply for a stronger rewrite
 
 Add Insight Mode workflow:
@@ -28,7 +28,7 @@ Add Insight Mode workflow:
 
 ## Repository Structure
 
-```
+```text
 resume-writer/
 |-- SKILL.md                  # Skill definition, triggers, and workflows
 |-- README.md                 # This file
@@ -40,22 +40,20 @@ resume-writer/
 
 ## Triggers
 
-| Trigger | Mode | What It Does |
-|---|---|---|
-| `rw` + resume | Enhance | Rewrites the provided resume and produces an audit |
-| `rw add` + post | Add Insight | Extracts principles from a pasted post and adds them to the library |
-| "rewrite my resume" | Enhance | Natural language trigger |
-| "review my resume" | Enhance | Natural language trigger |
-| "add to my library" | Add Insight | Natural language trigger for library additions |
+- `rw` + resume: Enhance mode. Rewrites the provided resume and produces an audit.
+- `rw add` + post: Add Insight mode. Extracts principles from a pasted post and adds them to the library.
+- "rewrite my resume": Enhance mode natural language trigger.
+- "review my resume": Enhance mode natural language trigger.
+- "add to my library": Add Insight mode natural language trigger.
 
 ## Installation
 
 1. Download the `resume-writer.skill` file
 2. Copy to your Claude skills directory. On Windows this is typically:
 
-```
-C:\Users\<username>\OneDrive\Documents\Claude\Skills\
-```
+    ```text
+    C:\Users\<username>\OneDrive\Documents\Claude\Skills\
+    ```
 
 3. Unzip if your client does not handle `.skill` files directly
 4. Restart Claude Desktop or refresh available skills in Claude.ai
@@ -64,7 +62,7 @@ C:\Users\<username>\OneDrive\Documents\Claude\Skills\
 
 Enhance a resume:
 
-```
+```text
 rw
 [paste resume text, or upload .docx, .pdf, or screenshot]
 [optional: target role or job description]
@@ -72,16 +70,18 @@ rw
 
 Add a principle from a recruiter post:
 
-```
+```text
 rw add
 [paste the post text, or upload a screenshot]
 ```
 
 Enhance Mode output includes:
 
-- An itemized audit table with columns for Location, Principle, Before, and After
+- A condensed audit by default that groups repeated issues by section
+- A full forensic line by line audit only when explicitly requested
 - The full rewritten resume
 - A Missing Data section listing metrics the user should supply
+- A Gap Analysis section listing likely missing evidence, keywords, and metrics for the target role
 - A Not in Library Observations section for weaknesses that need new principles added
 
 Add Insight Mode output includes:
@@ -132,11 +132,77 @@ The initial library contains five principles from a single ServiceNow practice l
 
 These are starting points. The library is expected to grow to dozens of principles over time across different industries and role levels.
 
+## Limitations
+
+- Parsing quality depends on source quality.
+- Multi column and table heavy resumes may lose structure during extraction.
+- If extraction is severely scrambled or incomplete, the skill should stop and ask for pasted text.
+- If `insights/principles.md` or `references/common-patterns.md` cannot be read, the audit runs in degraded mode and should clearly state what is missing.
+
+## Confidence Levels
+
+- High confidence: pasted text or clean DOCX.
+- Medium confidence: machine readable PDF.
+- Low confidence: screenshots, scans, or heavily formatted resumes.
+
+When the source is not pasted text, the output should state extraction confidence and any parsing limitations.
+
+## Targeted Rewrite Support
+
+When both a resume and job description or target role are present, the skill performs a targeted rewrite.
+
+- Reorders summary, skills, and bullet emphasis to match the target role.
+- Prioritizes target alignment over generic cleanup.
+- Produces a Gap Analysis section with missing evidence, missing keywords, and missing metrics.
+- Never fabricates experience, metrics, or unsupported keywords.
+
+## Condensed vs Full Audit
+
+- Condensed audit is the default.
+- Full forensic audit is only for explicit line by line requests.
+
+Condensed audit keeps output readable by grouping repeated issues and focusing on high value changes. Full forensic audit keeps per change detail with Location, Source, Before, and After.
+
+## Manual Recovery for Add Insight Mode
+
+If the environment cannot write to `insights/principles.md`, the skill should not claim the library was updated.
+
+Instead, return the exact principle block that should be appended manually and clearly state manual update is required.
+
+## Example Outputs
+
+Example condensed audit headings:
+
+```text
+Condensed Audit
+Section: Summary
+Section: Experience
+Section: Skills
+Missing Data
+Gap Analysis
+Not-in-library observations
+```
+
+Example missing data section:
+
+```text
+Missing Data
+- Experience / Role 1 / Bullet 2: Add scale metric (for example number of users, devices, or tickets).
+- Experience / Role 2 / Bullet 1: Add outcome metric (for example percentage reduction or time saved).
+```
+
+Example gap analysis section:
+
+```text
+Gap Analysis
+- Missing evidence: leadership scope for cross functional projects.
+- Missing keywords: incident management, change enablement, service level reporting.
+- Missing metrics: team size, ticket volume, MTTR baseline and improvement.
+```
+
 ## Related Repositories
 
-| Repo | Description |
-|---|---|
-| [mickpletcher/Anthropic](https://github.com/mickpletcher/Anthropic) | Claude skills library where this skill can live alongside others |
+- [mickpletcher/Anthropic](https://github.com/mickpletcher/Anthropic): Claude skills library where this skill can live alongside others.
 
 ## Blog
 

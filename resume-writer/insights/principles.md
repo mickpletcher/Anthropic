@@ -85,6 +85,22 @@ To add new principles, use the skill's "Add Insight" mode.
 
 ---
 
+## Two pages is the ceiling
+
+**Rule**: Keep most resumes to two pages maximum. If content pushes past two pages, cut lower value bullets, collapse older roles, and keep only evidence that strengthens the case for the target role.
+
+**Rationale**: Hiring teams scan quickly. Overlength resumes signal weak prioritization and bury the strongest evidence. Better curation usually beats more content.
+
+**Example violation**: A three-page resume where older roles repeat generic responsibilities and duplicate skills already proven in recent roles.
+
+**Example fix**: Collapse older experience into an "Earlier Experience" line, trim repetitive bullets, and keep the two pages focused on quantified outcomes relevant to the target role.
+
+**Sources**:
+
+- Brandon Wilson, CTA, MMIS, Founder of OnlyFlows and ServiceNow Practice Lead at Four Dragons — LinkedIn, April 2026
+
+---
+
 ## A resume is a sales document, not a job history
 
 **Rule**: A resume should persuade the reader to interview you. It is not a chronological list of every task you have ever performed. Every line must earn its place by making the case that you should be hired.

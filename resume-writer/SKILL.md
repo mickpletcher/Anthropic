@@ -1,6 +1,6 @@
 ---
 name: resume-writer
-description: Rewrite and enhance resumes using a persistent library of principles harvested from real recruiters, hiring managers, and HR professionals. Always trigger immediately when the user's message starts with "rw". Also trigger on "resume writer", "rewrite my resume", "enhance my resume", "fix my resume", "review my resume", or any request to improve, audit, or critique a resume. Also trigger when the user pastes a recruiter or hiring manager post (LinkedIn, blog, Reddit) and says "add to my library", "add insight", "rw add", or indicates they want to capture it as a resume principle. Handles paste, .docx, .pdf, and screenshot inputs. Produces a full rewrite AND an itemized audit mapping every change to a specific principle in the library or pattern in the common-patterns reference. General-purpose skill that works for any user's resume, not just the skill owner.
+description: Rewrite and enhance resumes using a persistent library of principles harvested from real recruiters, hiring managers, and HR professionals. Always trigger immediately when the user's message starts with "rw". Also trigger on "resume writer", "rewrite my resume", "enhance my resume", "fix my resume", "review my resume", or any request to improve, audit, or critique a resume. Also trigger when the user pastes a recruiter or hiring manager post (LinkedIn, blog, Reddit) and says "add to my library", "add insight", "rw add", or indicates they want to capture it as a resume principle. Handles paste, .docx, .pdf, and screenshot inputs. Produces a full rewrite plus a condensed audit by default, with full forensic line by line audit only when requested. General-purpose skill that works for any user's resume, not just the skill owner.
 ---
 
 # Resume Writer
@@ -40,13 +40,27 @@ Match the input type:
 - **Pasted text**: Use as-is.
 - **.docx**: Use the `docx` skill to read it.
 - **.pdf**: Use the `pdf-reading` skill to extract text. If the PDF is image-based (scanned), rasterize pages and read them as images.
-- **Screenshot / image**: Read the image directly. If the resume has multiple columns, tables, or complex structure and the OCR output looks mangled, stop and ask the user to paste the text instead — structure loss makes the audit unreliable.
+- **Screenshot / image**: Read the image directly.
 
-If the text is unreadable or clearly incomplete, stop and ask the user to re-upload.
+Apply these deterministic extraction rules:
+
+- **Single column and readable**: proceed.
+- **Multi column or table heavy**: proceed with a parsing fidelity warning.
+- **Severely scrambled or incomplete extraction**: stop and ask for pasted text.
+
+Extraction confidence model:
+
+- **High confidence**: pasted text or clean DOCX.
+- **Medium confidence**: machine readable PDF.
+- **Low confidence**: screenshots, scans, or heavily formatted resumes.
+
+If the source is not pasted text, include extraction confidence in the final output.
 
 ### Step 2: Load the insights library and common patterns
 
 Read `insights/principles.md` and `references/common-patterns.md` in full. Both are authoritative sources for the audit.
+
+If either file cannot be read, continue in degraded mode and state exactly what is missing and how that limits the audit.
 
 **Precedence rule**: When a violation could map to both a library principle and a common pattern, cite the library principle. Library principles carry named sources and specific framing; patterns are the fallback for hygiene issues no library principle covers.
 
@@ -58,11 +72,21 @@ Before rewriting, ask at most ONE question if it materially affects the rewrite:
 
 - If no target role is specified AND the resume is ambiguous: "What role or type of role is this resume targeting?"
 - If the user already gave the target role, do not ask.
+- If the user provided a job description, target role, or target company, do not ask a generic target question.
 - Do not ask about tone, format, or style preferences — infer them from the resume itself.
 
 Skip this step entirely if the target is obvious.
 
-### Step 4: Audit the resume
+### Step 4: Targeted rewrite track (when target info exists)
+
+When both a resume and a job description or explicit target role are present, run a targeted rewrite track inside Enhance mode.
+
+- Prioritize alignment to the target role over generic improvements.
+- Reorder summary, skills, and bullet emphasis to match the target role.
+- Highlight directly relevant evidence first in each recent role.
+- Do not fabricate experience, achievements, or keywords not supported by the original resume.
+
+### Step 5: Audit the resume
 
 For every bullet, section, and structural element, check it against each principle in the library and each pattern in common-patterns. Build an internal list of violations in this format:
 
@@ -78,7 +102,7 @@ Be specific. "Weak bullet" is not a valid issue. "No outcome specified — says 
 
 When the same violation maps to both a library principle and a pattern, apply the precedence rule: cite the library principle.
 
-### Step 5: Produce the rewrite
+### Step 6: Produce the rewrite
 
 Rewrite the full resume applying all recommended fixes. Preserve:
 
@@ -96,7 +120,7 @@ Rewrite freely:
 
 Do not invent facts. If a bullet lacks a number and the user did not provide one, rewrite using the strongest truthful framing available — do not fabricate metrics. Flag in the audit that a number is needed and ask the user to supply it.
 
-### Step 6: Self-validate the rewrite
+### Step 7: Self-validate the rewrite
 
 Before presenting the output, re-audit the rewritten text against the library and patterns. Rewrites frequently introduce new violations — a bullet fixed for specificity can end up too long, a reorganized skills section can drop ATS-relevant keywords.
 
@@ -110,16 +134,26 @@ For each section of the rewrite, check:
 
 If the re-audit surfaces issues, fix them silently before presenting. Do not show the user the self-validation pass — it is an internal checkpoint, not part of the deliverable.
 
-### Step 7: Produce the output
+### Step 8: Produce the output
 
 Deliver three things, in this order:
 
-1. **Itemized audit** — a table or structured list of every change, with columns: Location | Source | Before | After. The Source column holds either a library principle name or `common-patterns § <section>`. Include a "Missing data" section at the end listing any spots where the user needs to supply numbers or details to strengthen the rewrite further.
+1. **Audit** — output level depends on user request:
+   - **Condensed audit (default)**: group repeated issues by section, focus on highest value changes, keep output readable for normal users.
+   - **Full forensic audit (only on explicit request)**: line by line detail with Location | Source | Before | After for each change.
+
+   Always include:
+   - **Missing data**: specific numbers or details needed from the user.
+   - **Gap Analysis**: likely missing evidence, missing role specific keywords, and missing metrics relative to the target role when one is provided.
+
+   The Source field must hold either a library principle name or `common-patterns § <section>`.
 
 2. **Rewritten resume** — full text, ready to use.
    - If input was .docx, produce .docx using the `docx` skill, preserving any letterhead or formatting.
    - If input was .pdf, produce .docx by default (professional resumes are typically circulated as .docx or PDF, and .docx is the editable handoff the user can tune further).
    - If input was paste or image, produce Markdown unless the user asks for .docx.
+
+   If the source is not pasted text, state extraction confidence (High, Medium, or Low) and any parsing limitations.
 
 3. **Next steps** — a short list: missing metrics to fill in, recommended follow-ups, and anything flagged in "Not-in-library observations." If any Not-in-library observations recur across multiple resumes, offer: "This weakness comes up often but isn't in your library yet. Want to add it as a principle?"
 
@@ -161,6 +195,8 @@ Never create near-duplicate entries.
 
 Add new principles to `insights/principles.md` using the format defined at the top of that file. Maintain the existing structure. Do not reorder existing entries.
 
+If the environment cannot write to `insights/principles.md`, do not claim the library was updated. Instead return the exact principle text that should be appended manually.
+
 ### Step 5: Confirm
 
 Tell the user exactly what was added, merged, or skipped:
@@ -184,3 +220,11 @@ Skipped (already covered): [Name]
 - **Preserve facts, rewrite framing.** Employers, titles, dates, certifications, and education details are never changed. Everything else is fair game.
 - **The library grows over time.** If during a rewrite you notice the user would benefit from a principle not yet captured, mention it in "Next steps": "This weakness maps to a common recruiter complaint I do not have in your library yet. Want to add it?"
 - **General-purpose tone.** Do not assume the resume belongs to the skill owner. Match the voice of the existing resume unless the user requests a tone change.
+
+## Operational Constraints
+
+- If `insights/principles.md` or `references/common-patterns.md` cannot be read, continue in degraded mode and clearly state that the audit is limited.
+- If resume extraction comes from an image, screenshot, or scanned PDF and quality is poor, label the audit as partial.
+- If the resume is multi column, table heavy, or visually complex, proceed but warn that parsing fidelity may be reduced.
+- If a job description, target role, or target company is provided, prioritize alignment to that target over generic optimization.
+- If the environment cannot write to `insights/principles.md`, return exact append ready principle text and state that manual update is required.
