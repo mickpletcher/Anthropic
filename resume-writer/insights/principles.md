@@ -327,3 +327,231 @@ To add new principles, use the skill's "Add Insight" mode.
 - Heather Yurovsky, Career Coach, quoted in The Muse guide above — The Muse, Updated 11/29/2024
 
 ---
+
+## ATS can only score what it can read
+
+**Rule**: Keep critical qualification text in plain body content that parsing systems can extract reliably.
+
+**Rationale**: If key qualifications are buried in complex formatting or otherwise skipped by ATS, your resume can be screened out before human review.
+
+**Example violation**: Core certifications and tool keywords appear only in stylized layout elements and are absent from readable section body text.
+
+**Example fix**: Move role-critical qualifications into standard section content with clear labels and explicit terms that also appear in the job description.
+
+**Sources**:
+
+- Heather Yurovsky, Career Coach, quoted in "How to Make the Perfect Resume: Your Step-by-Step Guide (with Examples!)" — The Muse, Updated 11/29/2024
+- Alyse Maguire, Author, "How to Make the Perfect Resume: Your Step-by-Step Guide (with Examples!)" — The Muse, Updated 11/29/2024 (adds: ATS screening can remove candidates before human review)
+
+---
+
+## Use standard section labels recruiters can parse instantly
+
+**Rule**: Use conventional section names like Experience, Skills, and Education unless there is a strong role-specific reason not to.
+
+**Rationale**: Standard labeling improves scan speed for recruiters and reduces ambiguity in automated parsing.
+
+**Example violation**: Resume sections labeled "Where I Have Been" and "What I Bring" with mixed content.
+
+**Example fix**: Rename sections to "Experience," "Skills," and "Education," then map content cleanly to each section.
+
+**Sources**:
+
+- Alyse Maguire, Author, "How to Make the Perfect Resume: Your Step-by-Step Guide (with Examples!)" — The Muse, Updated 11/29/2024
+
+---
+
+## Only use a summary when it adds context you cannot show elsewhere
+
+**Rule**: Include a summary only when it clarifies a pivot, ties together disparate experience, or establishes senior narrative quickly.
+
+**Rationale**: A weak summary wastes high-value space and repeats information better shown in bullets.
+
+**Example violation**: A linear-career resume opens with a four-line summary that repeats job titles and generic adjectives.
+
+**Example fix**: Remove the summary and use the space for stronger achievement bullets, or keep a concise summary only if it adds missing context.
+
+**Sources**:
+
+- Lily Zhang, Career Counselor at the MIT Media Lab, "The Resume Summary Statement: When You Need One and How to Do It" — The Muse, Updated 2/7/2022
+- Kat Boogaard, Author and Employment Advisor, "20 Resume Summary Examples to Make Writing Your Own Easier" — The Muse, Updated 6/21/2024 (adds: ask whether summary adds value or restates content)
+
+---
+
+## Tailoring is section prioritization, not just keyword swapping
+
+**Rule**: Move the most role-relevant evidence to the top of the resume, even if that means changing section order for that application.
+
+**Rationale**: Recruiters make fast judgments. If best-match evidence is buried, the resume underperforms even with good content.
+
+**Example violation**: A target-role certification and relevant project are placed below unrelated recent duties because default section order was never adjusted.
+
+**Example fix**: Promote a relevant section near the top and lead with evidence that directly matches core requirements in the target posting.
+
+**Sources**:
+
+- Lily Zhang, Career Counselor at the MIT Media Lab, "What it Really Means to Tailor Your Resume" — The Muse, Updated 6/19/2020
+
+---
+
+## Transferable skills must be pulled into less relevant roles
+
+**Rule**: Rewrite bullets from less relevant roles to highlight transferable capabilities that map to target requirements.
+
+**Rationale**: Career pivots fail when old roles are presented as isolated history instead of reusable evidence.
+
+**Example violation**: Prior teaching role bullets list only classroom tasks while applying for sales roles that require stakeholder communication and persuasion.
+
+**Example fix**: Reframe bullets to emphasize transferable outcomes such as presentation, influence, and relationship management where truthfully demonstrated.
+
+**Sources**:
+
+- Lily Zhang, Career Counselor at the MIT Media Lab, "What it Really Means to Tailor Your Resume" — The Muse, Updated 6/19/2020
+
+---
+
+## Lead each role with the two bullets that matter most
+
+**Rule**: Put your highest-value bullets first in each role, because hiring managers skim top-down.
+
+**Rationale**: Strong evidence hidden in lower bullets is often missed during first-pass review.
+
+**Example violation**: Role opens with generic maintenance tasks, while the strongest transformation result appears in the last bullet.
+
+**Example fix**: Reorder bullets so scope-defining ownership and strongest outcome appear first.
+
+**Sources**:
+
+- Andrea Gerson, Resume Writer and Founder of Resume Scripter and RS Works, "How to Write Resume Bullets That'll Make the Hiring Manager Pay Attention" — The Muse, Updated 6/19/2020
+
+---
+
+## Context first, then detail, when company names are not self-explanatory
+
+**Rule**: Add brief business context before tactical detail so impact can be understood even when the employer is unfamiliar.
+
+**Rationale**: Recruiters cannot infer company scale, client complexity, or operational scope from unknown names alone.
+
+**Example violation**: "Implemented campaign optimization workflow" with no context on team, scale, or business environment.
+
+**Example fix**: "Spearheaded campaign optimization for a regional agency serving enterprise clients, then redesigned workflow that improved conversion quality and reduced rework."
+
+**Sources**:
+
+- Andrea Gerson, Resume Writer and Founder of Resume Scripter and RS Works, "How to Write Resume Bullets That'll Make the Hiring Manager Pay Attention" — The Muse, Updated 6/19/2020
+
+---
+
+## Dense bullets hide value
+
+**Rule**: Trim overloaded bullets to a few decisive details instead of listing every activity and stakeholder.
+
+**Rationale**: Over-packed bullets reduce readability and obscure the core achievement signal.
+
+**Example violation**: A single bullet that names eight teams, ten metrics, and five leadership levels with no clear primary outcome.
+
+**Example fix**: Keep the highest-signal details and explicit result in one concise bullet, moving secondary context elsewhere.
+
+**Sources**:
+
+- Andrea Gerson, Resume Writer and Founder of Resume Scripter and RS Works, "How to Write Resume Bullets That'll Make the Hiring Manager Pay Attention" — The Muse, Updated 6/19/2020
+
+---
+
+## Skills should confirm the story told by experience
+
+**Rule**: Only list skills that are supported by role bullets, projects, certifications, or otherwise defensible evidence.
+
+**Rationale**: Hiring managers use skills to connect dots in your story. Orphaned skills lower credibility.
+
+**Example violation**: Skills section lists Terraform and Kubernetes, but no role or project mentions infrastructure automation work.
+
+**Example fix**: Remove unsupported skills or add truthful evidence in projects and experience that demonstrates actual use.
+
+**Sources**:
+
+- Lily Zhang, Career Counselor at the MIT Media Lab, "Every Question You Have About Resume Skills Sections, Answered" — The Muse, Updated 4/27/2023
+- Monica Orta, Hiring Manager at the MIT Media Lab, quoted in the skills section guide above — The Muse, Updated 4/27/2023 (adds: skills should complete the picture of candidate experience)
+
+---
+
+## Keep soft skills out of skills lists and prove them in evidence
+
+**Rule**: Reserve skills sections for hard skills and show soft skills through outcomes in role bullets.
+
+**Rationale**: Soft skill claims without evidence are easy to write and hard to trust.
+
+**Example violation**: Skills section includes "Leadership, Communication, Teamwork, Problem Solving" with no supporting results in experience.
+
+**Example fix**: Replace soft skill list with hard skills and use bullets that demonstrate leadership, collaboration, and communication impact.
+
+**Sources**:
+
+- Lily Zhang, Career Counselor at the MIT Media Lab, "Every Question You Have About Resume Skills Sections, Answered" — The Muse, Updated 4/27/2023
+
+---
+
+## Do not list skills you cannot perform confidently today
+
+**Rule**: Treat listed skills as interview commitments. If you cannot use or explain a skill now, do not list it.
+
+**Rationale**: Inflated skill inventories trigger credibility risk during screening and technical evaluation.
+
+**Example violation**: Candidate lists advanced Python and Kubernetes but cannot discuss recent usage or implementation decisions.
+
+**Example fix**: Keep only current, defensible skills and move learning-stage technologies to personal development notes outside the resume.
+
+**Sources**:
+
+- Lily Zhang, Career Counselor at the MIT Media Lab, "Every Question You Have About Resume Skills Sections, Answered" — The Muse, Updated 4/27/2023
+
+---
+
+## Use range, frequency, and scale when exact numbers are unavailable
+
+**Rule**: When exact metrics are missing, quantify with realistic ranges, cadence, and operational scale rather than avoiding numbers entirely.
+
+**Rationale**: Recruiters still need scope signals. Honest estimates are more useful than vague claims and safer than fabricated precision.
+
+**Example violation**: "Reviewed documents and supervised student researchers."
+
+**Example fix**: "Reviewed 40-50 technical documents weekly and supervised 7-12 research assistants per year across two lab initiatives."
+
+**Sources**:
+
+- Lily Zhang, Career Counselor at the MIT Media Lab, "How to Quantify Your Resume Bullets (When You Don't Work With Numbers)" — The Muse, Updated 6/19/2020
+
+---
+
+## Project sections should prove execution, not just participation
+
+**Rule**: For projects, include objective, tool or system context, your ownership, and concrete outcome.
+
+**Rationale**: Project sections are especially important for early-career candidates and career changers, but only if they show real execution signal.
+
+**Example violation**: "Capstone Project: worked with team to build app."
+
+**Example fix**: "Built and deployed a scheduling app in a four-person capstone team using Python and PostgreSQL, owning API integration and reducing manual scheduling effort for pilot users."
+
+**Sources**:
+
+- Alyse Maguire, Author, "How to Make the Perfect Resume: Your Step-by-Step Guide (with Examples!)" — The Muse, Updated 11/29/2024
+- Kat Boogaard, Author and Employment Advisor, "20 Resume Summary Examples to Make Writing Your Own Easier" — The Muse, Updated 6/21/2024 (adds: nontraditional paths need explicit evidence framing)
+
+---
+
+## Returning from a career break needs explicit readiness framing
+
+**Rule**: If returning after time away, state the break briefly and pair it with role-relevant readiness evidence.
+
+**Rationale**: Direct framing reduces uncertainty and helps recruiters focus on capability, not timeline gaps.
+
+**Example violation**: Resume resumes after a multiyear gap with no explanation or current-skill signal.
+
+**Example fix**: "Returning after a planned caregiving break, bringing prior customer support experience plus current tooling refresh and recent volunteer operations work."
+
+**Sources**:
+
+- Kat Boogaard, Author and Employment Advisor, "20 Resume Summary Examples to Make Writing Your Own Easier" — The Muse, Updated 6/21/2024
+
+---
