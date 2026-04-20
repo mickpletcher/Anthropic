@@ -214,7 +214,7 @@ Skipped (already covered): [Name]
 
 ## Principles of using this skill
 
-- **Every audit finding must map to a library principle, a pattern in `common-patterns.md`, or be clearly flagged as "Not-in-library observation".** Do not invent principles.
+- **Every audit finding must map to a library principle, a pattern in `common-patterns.md`, or be clearly flagged as "Not-in-library observations".** Do not invent principles.
 - **Library principles win over patterns** when both apply. Library entries have attribution and specific framing; patterns are the fallback.
 - **Never fabricate metrics.** If a bullet needs a number the user did not supply, flag it in the "Missing data" section and rewrite with the strongest truthful framing available.
 - **Preserve facts, rewrite framing.** Employers, titles, dates, certifications, and education details are never changed. Everything else is fair game.

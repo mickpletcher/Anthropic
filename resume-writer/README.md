@@ -4,27 +4,133 @@ A Claude skill that rewrites resumes using a persistent library of principles ha
 
 ## Overview
 
-Resume Writer operates in two modes. Enhance Mode takes a resume in any common format (paste, .docx, .pdf, or screenshot) and produces a full rewrite plus an itemized audit that maps every change to a specific library principle. Add Insight Mode takes a recruiter post or HR blog excerpt, extracts the principle, and appends it to the local insights library for use on every future rewrite.
+Resume Writer runs in two modes. Enhance Mode rewrites resumes and returns a condensed audit by default. Full forensic line by line audit is available on request. Add Insight Mode extracts principles from recruiter or hiring guidance and appends them to the local library for future rewrites.
 
-The library is curated by the user, so the skill improves as you feed it more high signal posts. The skill ships seeded with five principles extracted from a Brandon Wilson LinkedIn post (ServiceNow Practice Lead at Four Dragons) plus a set of universal structural patterns that apply regardless of library content.
+The library is curated by the user, so the skill improves as you feed it high signal guidance over time.
 
 ## What This Does
 
-Enhance Mode workflow:
+Enhance Mode:
 
 1. Detects the resume format and extracts text
-2. Loads every principle from the insights library
-3. Audits every bullet, section, and structural choice against the library
-4. Produces a full rewrite and a condensed audit by default, with full forensic detail only when requested
-5. Flags any missing metrics the user should supply for a stronger rewrite
+2. Applies confidence levels based on source quality
+3. Loads principles and common patterns
+4. Produces a full rewrite plus a condensed audit by default
+5. Adds Missing data and Gap Analysis sections
+6. Provides full forensic audit only when explicitly requested
 
-Add Insight Mode workflow:
+Add Insight Mode:
 
 1. Accepts a pasted post, URL, or screenshot of a recruiter or HR post
 2. Extracts one or more actionable principles
 3. Checks for duplicates against existing library entries
 4. Appends new principles to `insights/principles.md` with source attribution
 5. Confirms what was added, merged, or skipped
+
+## Why Trust This Skill
+
+- Every rewrite recommendation is traceable to either a named principle in `insights/principles.md` or a cited entry in `references/common-patterns.md`.
+- Factual resume details are preserved: employer names, job titles, dates, education, and certifications.
+- Metrics are never fabricated. Missing metrics are flagged in Missing data.
+- Low confidence extraction is labeled honestly for scans, screenshots, and heavy layouts.
+- Weaknesses not covered by the current library are flagged as Not-in-library observations instead of fake attribution.
+
+## Output Modes
+
+- Condensed audit (default): grouped by section, highest value issues first.
+- Full forensic audit (on request): line by line detail with Location, Source, Before, After.
+
+Both modes include a rewritten resume, Missing data, and Gap Analysis.
+
+## Confidence Levels
+
+- High confidence: pasted text or clean DOCX.
+- Medium confidence: machine readable PDF.
+- Low confidence: screenshots, scans, or heavily formatted resumes.
+
+If the source is not plain pasted text, extraction confidence and parsing limitations are stated in output.
+
+## Mini Before and After Examples
+
+1. Weak technical bullet to specific impact
+
+Before:
+
+```text
+Worked on Azure automation and improved deployment process.
+```
+
+After:
+
+```text
+Built PowerShell automation for Azure resource validation and release gates, cutting failed deployments from 14% to 3% across quarterly releases.
+```
+
+1. Generic summary to targeted summary
+
+Before:
+
+```text
+Experienced IT professional seeking a challenging position.
+```
+
+After:
+
+```text
+Endpoint automation engineer focused on Intune and ConfigMgr operations for large Windows fleets, with a track record of reducing compliance drift and manual remediation workload.
+```
+
+1. Skills dump to grouped role relevant skills
+
+Before:
+
+```text
+PowerShell, SCCM, Intune, Azure, SQL, Python, Linux, VMware, networking, security, Windows, Office, SharePoint, ServiceNow
+```
+
+After:
+
+```text
+Endpoint Management: Intune, ConfigMgr (SCCM), Windows 11
+Automation: PowerShell, Graph API, task sequence scripting
+Cloud Identity: Azure AD, Conditional Access
+Operational Reporting: SQL, compliance dashboards
+```
+
+## Gap Analysis Example
+
+```text
+Gap Analysis
+- Missing keyword: endpoint compliance baseline
+- Missing metric: percentage improvement in compliant devices after remediation automation
+- Missing evidence: ownership of cross team rollout and stakeholder communication
+```
+
+## Evidence Coverage
+
+What the skill can strengthen:
+
+- Measurable outcomes
+- Scope (users, devices, services, regions, team size)
+- Named systems and tools
+- Leadership and ownership signals
+- Business impact framing
+
+What the skill cannot invent:
+
+- Numbers the user never supplied
+- Certifications not earned
+- Job titles not held
+- Tools not actually used
+
+## How to Judge a Good Rewrite
+
+- Is the target role obvious within seconds?
+- Are key bullets specific about what was built or changed?
+- Are outcomes quantified where the source evidence supports it?
+- Were weak verbs removed?
+- Is the skills section grouped and role relevant?
+- Is the rewrite still factually faithful to the original resume?
 
 ## Repository Structure
 
@@ -80,9 +186,9 @@ Enhance Mode output includes:
 - A condensed audit by default that groups repeated issues by section
 - A full forensic line by line audit only when explicitly requested
 - The full rewritten resume
-- A Missing Data section listing metrics the user should supply
+- A Missing data section listing metrics the user should supply
 - A Gap Analysis section listing likely missing evidence, keywords, and metrics for the target role
-- A Not in Library Observations section for weaknesses that need new principles added
+- A Not-in-library observations section for weaknesses that need new principles added
 
 Add Insight Mode output includes:
 
@@ -136,77 +242,9 @@ These are starting points. The library is expected to grow to dozens of principl
 
 - Parsing quality depends on source quality.
 - Multi column and table heavy resumes may lose structure during extraction.
-- If extraction is severely scrambled or incomplete, the skill should stop and ask for pasted text.
-- If `insights/principles.md` or `references/common-patterns.md` cannot be read, the audit runs in degraded mode and should clearly state what is missing.
-
-## Confidence Levels
-
-- High confidence: pasted text or clean DOCX.
-- Medium confidence: machine readable PDF.
-- Low confidence: screenshots, scans, or heavily formatted resumes.
-
-When the source is not pasted text, the output should state extraction confidence and any parsing limitations.
-
-## Targeted Rewrite Support
-
-When both a resume and job description or target role are present, the skill performs a targeted rewrite.
-
-- Reorders summary, skills, and bullet emphasis to match the target role.
-- Prioritizes target alignment over generic cleanup.
-- Produces a Gap Analysis section with missing evidence, missing keywords, and missing metrics.
-- Never fabricates experience, metrics, or unsupported keywords.
-
-## Condensed vs Full Audit
-
-- Condensed audit is the default.
-- Full forensic audit is only for explicit line by line requests.
-
-Condensed audit keeps output readable by grouping repeated issues and focusing on high value changes. Full forensic audit keeps per change detail with Location, Source, Before, and After.
-
-## Manual Recovery for Add Insight Mode
-
-If the environment cannot write to `insights/principles.md`, the skill should not claim the library was updated.
-
-Instead, return the exact principle block that should be appended manually and clearly state manual update is required.
-
-## Example Outputs
-
-Example condensed audit headings:
-
-```text
-Condensed Audit
-Section: Summary
-Section: Experience
-Section: Skills
-Missing Data
-Gap Analysis
-Not-in-library observations
-```
-
-Example missing data section:
-
-```text
-Missing Data
-- Experience / Role 1 / Bullet 2: Add scale metric (for example number of users, devices, or tickets).
-- Experience / Role 2 / Bullet 1: Add outcome metric (for example percentage reduction or time saved).
-```
-
-Example gap analysis section:
-
-```text
-Gap Analysis
-- Missing evidence: leadership scope for cross functional projects.
-- Missing keywords: incident management, change enablement, service level reporting.
-- Missing metrics: team size, ticket volume, MTTR baseline and improvement.
-```
-
-## Related Repositories
-
-- [mickpletcher/Anthropic](https://github.com/mickpletcher/Anthropic): Claude skills library where this skill can live alongside others.
-
-## Blog
-
-Technical posts about Claude skills, automation, and workflow tooling at [mickitblog.blogspot.com](https://mickitblog.blogspot.com).
+- If extraction is severely scrambled or incomplete, the skill stops and asks for pasted text.
+- If `insights/principles.md` or `references/common-patterns.md` cannot be read, the audit runs in degraded mode and explicitly states missing inputs.
+- If the environment cannot write to `insights/principles.md`, Add Insight mode returns append ready text for manual update.
 
 ## License
 

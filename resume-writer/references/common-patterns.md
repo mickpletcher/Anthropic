@@ -14,6 +14,15 @@ For example: `common-patterns § Bullet length`, `common-patterns § Content pat
 
 When both a library principle and a pattern cover the same violation, cite the library principle (see the precedence rule in `insights/principles.md`).
 
+## Audit wording conventions
+
+Use these terms consistently across outputs:
+
+- **Condensed audit**: default grouped findings by section, focused on highest value fixes.
+- **Full forensic audit**: line by line detail only when explicitly requested.
+- **Missing data**: concrete details the user must supply to improve evidence quality.
+- **Not-in-library observations**: real weaknesses not covered by current library principles.
+
 ---
 
 ## Structural patterns
