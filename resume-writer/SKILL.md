@@ -29,6 +29,29 @@ Go to the **Add Insight Workflow** section.
 - If only a recruiter/HR post is present with no resume, default to Add Insight mode. Do not ask.
 - Only ask "enhance or add to library?" when the input is genuinely ambiguous (e.g., a LinkedIn profile export that could be either).
 
+## Output Mode Handling
+
+Default output mode is `human`.
+
+Switch output mode when user intent indicates automation needs:
+
+- If user asks for automation, API, JSON, machine-readable, structured output, pipeline use, CLI use, n8n use, or parsing, switch to `json` or `both`.
+
+Mode behavior:
+
+- `human`: return the standard readable audit output.
+- `json`: return valid JSON only, matching `json-output-spec.md`.
+- `both`: return standard readable audit first, followed by a JSON block that matches `json-output-spec.md`.
+
+Hard enforcement rules:
+
+- In `json` mode, return valid JSON only.
+- In `json` mode, do not use markdown fences.
+- In `json` mode, do not include prose outside the JSON object.
+- In `both` mode, the JSON block must still fully conform to the schema.
+- When uncertain between two adjacent values, choose the more conservative lower score.
+- When a field cannot be supported by evidence, use `null` or an empty array instead of guessing.
+
 ---
 
 ## Enhance Workflow
@@ -145,6 +168,8 @@ If the re-audit surfaces issues, fix them silently before presenting. Do not sho
 
 ### Step 8: Produce the output
 
+Apply Output Mode Handling before final response assembly.
+
 Deliver seven sections, in this order:
 
 1. **Final Score Summary**
@@ -193,6 +218,12 @@ Deliver seven sections, in this order:
 
 If source is not pasted text, always state extraction confidence (High, Medium, or Low) and parsing limitations.
 
+Output mode assembly rules:
+
+- `human`: return only the seven human-readable sections.
+- `json`: return only the JSON object defined by `json-output-spec.md`.
+- `both`: return the seven human-readable sections first, then append a fully conforming JSON object.
+
 ## Scoring Workflow
 
 Use `scoring-model.md` as the source of truth.
@@ -206,6 +237,8 @@ Use `scoring-model.md` as the source of truth.
    - Assign score from `0` to `3`.
    - Assign severity independently (`CRITICAL`, `MAJOR`, `MINOR`, `INFO`).
    - Apply principle weight from the mapping table.
+   - When uncertain between adjacent scores, choose the lower score unless strong evidence supports the higher score.
+   - Do not inflate scores due to polished wording alone.
 
 3. Calculate category scores:
    - Use weighted average per category from `scoring-model.md`.
@@ -234,10 +267,37 @@ Use `scoring-model.md` as the source of truth.
    - Always label extraction confidence.
    - Always state whether audit ran in Generic or Targeted mode.
    - In Low confidence extraction mode, score only trusted text and cap maximum verdict at Strong unless user manually confirms text.
+   - Weak extraction confidence must reduce certainty and must not be silently ignored.
 
-9. Preserve existing core rules:
+9. Populate JSON structure consistently (for `json` and `both` modes):
+   - `output_mode`
+   - `review_context`
+   - `confidence`
+   - `audit_mode`
+   - `final_score`
+   - `verdict`
+   - `hire_likelihood`
+   - `critical_issue_count`
+   - `major_issue_count`
+   - `minor_issue_count`
+   - `category_scores`
+   - `principle_scores`
+   - `missing_data_flags`
+   - `system_flags`
+   - `top_fixes`
+   - `rewritten_resume`
+   - `notes`
+
+10. Bind rewrite output to scoring records:
+   - Every CRITICAL or MAJOR issue should include a fix recommendation.
+   - In `json` and `both` modes, populate `principle_scores[].fix` whenever possible.
+   - If rewrite output is included, place full rewritten resume in `rewritten_resume`.
+   - If no rewrite was requested, set `rewritten_resume` to `null`.
+
+11. Preserve existing core rules:
    - Library principles take precedence over common patterns when both apply.
    - Never fabricate metrics.
+   - Missing data must not be fabricated to improve scores.
    - Preserve factual resume details.
    - Keep condensed audit default and forensic audit opt in.
 

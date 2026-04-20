@@ -45,6 +45,29 @@ Add Insight Mode:
 
 Both modes include a rewritten resume, Missing data, and Gap Analysis.
 
+## JSON Output Mode
+
+Resume Writer supports three output modes:
+
+- `human`
+- `json`
+- `both`
+
+JSON mode is designed for automation and integrations. The output follows a documented schema in `json-output-spec.md`.
+
+- Pure `json` mode returns valid JSON only.
+- `both` mode returns readable audit output first, then a schema-valid JSON object.
+
+Use `both` when you want readable feedback plus machine-readable output in one run.
+
+## Automation Use Cases
+
+- n8n workflows
+- CLI tools
+- local automation scripts
+- dashboards
+- batch resume processing
+
 ## Scoring Model
 
 - Resumes are scored against weighted recruiter-sourced principles.
@@ -90,6 +113,71 @@ Issues by Severity
 
 Missing Data
 - MISSING METRIC: outcome numbers for latest role impact bullets
+```
+
+## Scored JSON Example
+
+```json
+{
+    "output_mode": "json",
+    "review_context": "targeted",
+    "confidence": "medium",
+    "audit_mode": "condensed",
+    "final_score": 74.2,
+    "verdict": "Good but inconsistent",
+    "hire_likelihood": "Possible interview traction if top issues are fixed",
+    "critical_issue_count": 1,
+    "major_issue_count": 1,
+    "minor_issue_count": 2,
+    "category_scores": {
+        "positioning_and_narrative": 72.0,
+        "evidence_and_bullet_strength": 69.0,
+        "ats_and_structural_reliability": 84.0,
+        "relevance_and_targeting": 73.0,
+        "professionalism_and_trust": 81.0
+    },
+    "principle_scores": [
+        {
+            "principle": "Make the target role obvious in the top third",
+            "source_type": "library_principle",
+            "source_name": "Make the target role obvious in the top third",
+            "category": "Positioning and Narrative",
+            "score": 1,
+            "weight": 1.5,
+            "severity": "CRITICAL",
+            "reason": "Target role is not clearly stated near the top.",
+            "before": "Experienced professional with a diverse background.",
+            "after": "Automation engineer focused on endpoint and cloud operations.",
+            "fix": "State the target role and role-fit evidence in the top third."
+        },
+        {
+            "principle": "The bullet formula is verb, work, outcome",
+            "source_type": "library_principle",
+            "source_name": "The bullet formula is verb, work, outcome",
+            "category": "Evidence and Bullet Strength",
+            "score": 1,
+            "weight": 1.5,
+            "severity": "MAJOR",
+            "reason": "Bullets list tasks without outcomes.",
+            "before": "Worked on onboarding processes.",
+            "after": "Built onboarding workflow improvements across 3 teams.",
+            "fix": "Add outcome and measurable impact where available."
+        }
+    ],
+    "missing_data_flags": [
+        "MISSING_METRIC"
+    ],
+    "system_flags": [
+        "BULLET_QUALITY_LOW"
+    ],
+    "top_fixes": [
+        "Lead with a clear target role and rewrite first two role bullets with outcomes."
+    ],
+    "rewritten_resume": null,
+    "notes": [
+        "Rewrite not requested in this example."
+    ]
+}
 ```
 
 ## Confidence Levels
@@ -189,6 +277,7 @@ resume-writer/
 |-- SKILL.md                  # Skill definition, triggers, and workflows
 |-- README.md                 # This file
 |-- scoring-model.md          # Deterministic scoring definitions and mappings
+|-- json-output-spec.md       # Official machine-readable output contract
 |-- insights/
 |   |-- principles.md         # Persistent library of recruiter principles
 |-- references/

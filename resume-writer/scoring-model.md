@@ -134,6 +134,26 @@ Track missing data separately from writing quality.
 
 These flags do not automatically become writing failures. They are used for follow up action and can explain why an otherwise clean bullet cannot reach a higher score.
 
+## System Flags
+
+System flags are cross-principle aggregate warnings, not individual principle scores.
+
+- `BULLET_QUALITY_LOW`
+- `METRICS_ABSENT`
+- `ATS_RISK_HIGH`
+- `TARGETING_WEAK`
+- `TIMELINE_CONFUSING`
+- `CONTACT_INFO_UNSAFE`
+
+Use these to summarize higher-level risk patterns that appear across multiple findings.
+
+## Conservative Scoring Guardrails
+
+- When uncertain between two adjacent scores, choose the lower score unless strong evidence supports the higher score.
+- Do not inflate scores because wording sounds polished if evidence quality is still weak.
+- Weak extraction confidence must reduce certainty and must not be ignored.
+- Missing data must never be fabricated to improve scoring outcomes.
+
 ## Context Modes
 
 ### Generic resume review
@@ -166,6 +186,8 @@ The final audit output should always appear in this order:
 7. Top Fixes / Next Steps
 
 ## Internal JSON Output Example
+
+Official JSON contract and field naming live in `json-output-spec.md`.
 
 ```json
 {
