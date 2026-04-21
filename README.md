@@ -4,7 +4,7 @@ Claude AI skill definitions, custom behaviors, and automation workflows built fo
 
 ## Overview
 
-This repository contains a personal library of Claude skills, structured instruction sets that teach Claude how to behave in specific contexts. The repo currently includes 21 skills. Most skill folders include a source definition file such as `skill.md` or `SKILL.md` plus `README.md`, and some also include a packaged `.skill` or `skill.zip` artifact. Skills are installed into Claude Desktop and activate automatically when the right context is detected.
+This repository contains a personal library of Claude skills, structured instruction sets that teach Claude how to behave in specific contexts. The repo currently includes 22 skills. Most skill folders include a source definition file such as `skill.md` or `SKILL.md` plus `README.md`, and some also include a packaged `.skill` or `skill.zip` artifact. Skills are installed into Claude Desktop and activate automatically when the right context is detected.
 
 All content in this repository is personal work. It is not sourced from, connected to, or representative of any employer systems, data, or internal processes.
 
@@ -34,6 +34,7 @@ Skills are organized around four areas: **content creation**, **technical automa
 | --- | --- | --- |
 | [alpaca-trading](./Alpaca%20Trading/README.md) | Context-based | Builds and extends algorithmic trading scripts against the Alpaca API, PowerShell-first with mandatory live trading guards |
 | [crypto-listings](./Cryptolistings/README.md) | `cl` | Retrieves recent and upcoming crypto listings with source backed exchange data, UTC windows, and structured market briefs |
+| [food-analyzer](./food-analyzer/README.md) | `fa` or `food` | Analyzes food photos, labels, and ingredient lists with macros, glycemic impact, NOVA processing score, timing fit, and medication interaction flags |
 | [n8n-workflow](./n8n%20Workflow/README.md) | Context-based | Designs n8n automation workflows with Proxmox, Claude API node config, and Cloudflare Tunnel patterns |
 | [pihole](./PiHole/README.md) | Context-based | Provides Pi-hole setup and administration guidance |
 | [pihole-blocklist](./PiHole%20Blocklist/README.md) | Context-based | Evaluates, categorizes, and documents new Pi-hole blocklist sources for the curated blocklist repository |
@@ -108,6 +109,7 @@ Anthropic/
 ├── Cryptolistings/
 ├── Facebook Post/
 ├── Facebook Reply/
+├── food-analyzer/
 ├── fitness/
 ├── GitHub Readme/
 ├── Home Assistant Automation/
