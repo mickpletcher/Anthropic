@@ -11,7 +11,7 @@ The skill targets a standard FDA 2,000 kcal daily reference diet. All percent da
 ## Triggers
 
 | Trigger | Description |
-|---|---|
+| --- | --- |
 | `fa` | Primary shorthand |
 | `food` | Natural language prefix |
 | Uploaded food image | Any photo of a meal, plate, label, or ingredient list |
@@ -66,7 +66,7 @@ Every interaction section closes with a pharmacist and physician disclaimer.
 
 Specific, quantified swap suggestions generated only when the food scores poorly across defined thresholds. The section is omitted entirely for food that scores well. Swaps follow the format:
 
-```
+```text
 Swap [specific item] for [specific alternative] → [numeric benefit]
 ```
 
@@ -77,7 +77,7 @@ Swap libraries cover high calorie and carb reduction, saturated fat reduction, s
 ## Input Modes
 
 | Mode | What Claude Sees | Behavior |
-|---|---|---|
+| --- | --- | --- |
 | Meal or Plate | Actual food, plated dish, restaurant item | Visual portion estimation using standard heuristics |
 | Nutrition Label | FDA-style Nutrition Facts panel | Direct value extraction from label |
 | Ingredient List | Text list of ingredients | Additive flagging, allergen detection, NOVA classification |
@@ -100,7 +100,7 @@ If the user declines to share either, the skill falls back to universal flags on
 ## NOVA Classification Reference
 
 | Group | Name | Description | Examples |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | 1 | Unprocessed or Minimally Processed | Natural foods with no added substances | Fresh fruit, plain meat, eggs, plain yogurt |
 | 2 | Processed Culinary Ingredients | Extracted substances used in cooking | Oils, flour, sugar, salt, spices |
 | 3 | Processed Foods | NOVA 1 or 2 foods with added salt, sugar, or oil | Canned fish, artisan bread, simple cheese |
@@ -113,7 +113,7 @@ NOVA 4 marker categories: emulsifiers, artificial sweeteners, artificial colors,
 ## Glycemic Index Reference
 
 | Classification | GI Range | GL Range |
-|---|---|---|
+| --- | --- | --- |
 | Low | Under 55 | Under 10 |
 | Medium | 56 to 69 | 11 to 19 |
 | High | 70 and above | 20 and above |
@@ -125,7 +125,7 @@ Glycemic load is calculated as `(GI x net carbs per serving) / 100`. GI modifier
 ## Confidence Levels
 
 | Level | Condition |
-|---|---|
+| --- | --- |
 | High | Nutrition label clearly readable, values extracted directly |
 | Medium | Recognizable dish, standard portion visible |
 | Low | Partial view, obscured label, mixed or layered dish, unusual item |
@@ -137,7 +137,7 @@ Glycemic load is calculated as `(GI x net carbs per serving) / 100`. GI modifier
 All percent daily values use the FDA standard 2,000 kcal reference diet.
 
 | Nutrient | Daily Reference Value |
-|---|---|
+| --- | --- |
 | Calories | 2,000 kcal |
 | Total Fat | 78g |
 | Saturated Fat | 20g |
@@ -158,7 +158,7 @@ Users can declare custom daily targets at any point in the session. The skill ap
 
 ## Repository Structure
 
-```
+```text
 food-analyzer/
 |-- skill.md       # Full skill instructions, output format, and reference tables
 |-- README.md      # This file
@@ -170,7 +170,7 @@ food-analyzer/
 
 Copy the `food-analyzer` folder into your Claude skills directory.
 
-```
+```text
 skills/
 |-- food-analyzer/
 |   |-- skill.md
@@ -179,7 +179,7 @@ skills/
 
 Or install from the packaged `.skill` file:
 
-```
+```text
 food-analyzer.skill
 ```
 
@@ -190,7 +190,7 @@ The skill activates automatically when Claude detects a food-related image or a 
 ## Related Repositories
 
 | Repo | Description |
-|---|---|
+| --- | --- |
 | [mickpletcher/Anthropic](https://github.com/mickpletcher/Anthropic) | Full Claude skills library including this skill and all others |
 
 ---
