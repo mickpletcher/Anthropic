@@ -1,44 +1,47 @@
 # alpaca-trading
 
-A Claude skill for building, extending, and debugging algorithmic trading scripts against the Alpaca API.
+A Claude skill for working safely in the `Trading` repository and its Alpaca-related workflows.
 
 ## What It Does
 
-Generates PowerShell-first trading scripts aligned with Mick's five-module repo structure. Enforces paper trading by default, mandatory live trading guards, trade journal logging, and Claude API integration as a reasoning layer only — never as a direct execution trigger.
+Guides Claude to work within the current mixed Python and PowerShell `Trading` repo structure. It preserves existing repo patterns, defaults to paper-trading-safe guidance, keeps live-trading safeguards explicit, and treats AI analysis as advisory rather than as a direct execution trigger.
 
 ## Trigger Phrases
 
 | Phrase | Action |
 |--------|--------|
-| `alpaca script for...` | Generate a trading script for the described task |
-| `backtesting script` | Historical strategy testing module |
-| `paper trading...` | Simulated execution against paper endpoint |
-| `live trading...` | Live script with mandatory CONFIRM guard |
-| `trade journal entry` | Log schema and CSV append pattern |
-| `AI coaching for...` | Claude API reasoning layer integration |
+| `alpaca script for...` | Create or update a script in the existing Trading repo structure |
+| `backtesting script` | Work in the `Backtesting/` area |
+| `paper trading...` | Prefer the paper-trading-safe path |
+| `live trading...` | Require explicit live-trading guardrails |
+| `trade journal...` | Work in the `Journal/` area or its related logging flows |
+| `alpaca module` | Use the reusable PowerShell modules under `src/` |
 
-## Repo Structure: mickpletcher/Alpaca
+## Repo Structure: Trading
 
-```
-Alpaca/
-├── Backtesting/    ← Historical strategy testing
-├── PaperTrading/   ← Simulated execution (paper endpoint)
-├── LiveTrading/    ← Real money (requires explicit -LiveTrading switch + CONFIRM)
-├── TradeJournal/   ← P&L tracking, CSV logging, trade records
-└── AICoaching/     ← Claude API reasoning layer
+```text
+Trading/
+|-- Alpaca/
+|-- Backtesting/
+|-- Journal/
+|-- Scheduler/
+|-- src/
+|-- Tests/
+|-- rsi_macd_bot/
+`-- btc-signal-executor/
 ```
 
 ## Safety Rules Always Enforced
 
-- API keys loaded from environment variables only — never hardcoded
-- Paper trading endpoint used by default
-- Live trading requires `-LiveTrading` switch plus typing `CONFIRM` at runtime
-- All orders logged to trade journal before and after execution
-- Claude API used as input to decision logic only — never triggers orders directly
+- Paper trading is the default guidance unless the user explicitly requests live trading
+- API keys come from environment variables or existing repo config flows, never hardcoded
+- Live trading must remain opt-in and guarded by an explicit confirmation step
+- AI output is advisory only and must not directly place orders
+- Existing trading logic should be preserved unless the user explicitly asks for a larger rewrite
 
 ## Live Trading Guard
 
-Every script touching real money includes this pattern — it cannot be removed:
+Every script touching real money should keep an explicit confirmation gate:
 
 ```powershell
 if ($LiveTrading) {
@@ -49,23 +52,21 @@ if ($LiveTrading) {
 
 ## AI Coaching Pattern
 
-Claude returns `BULLISH`, `BEARISH`, or `NEUTRAL` with a one-sentence rationale based on price, volume, RSI, and MACD inputs. PowerShell code makes the actual trade decision — Claude is analysis only.
-
-## Trade Journal Schema
-
-Each trade logs: Timestamp, Symbol, Side, Qty, EntryPrice, ExitPrice, PnL, OrderId, Mode (Paper/Live), AISignal, Notes.
+Claude can provide analysis such as `BULLISH`, `BEARISH`, or `NEUTRAL`, but deterministic code must still apply risk checks and decide whether any order is placed.
 
 ## Script Conventions
 
-All scripts follow the powershell-automation skill standards: Mick's comment-based help header, `[CmdletBinding()]`, `param()` with validation, CMTrace log file, `try/catch` on all API calls, and approved PowerShell verbs.
+Follow the existing repo conventions for PowerShell and Python rather than inventing a new architecture. Reuse nearby patterns for logging, config, tests, and docs.
 
 ## Files
 
-```
-alpaca-trading/
-└── SKILL.md    ← Repo structure, API reference, core patterns, live guard, journal schema, safety checklist
+```text
+Alpaca Trading/
+|-- README.md
+|-- skill.md
+`-- alpaca-trading.skill
 ```
 
 ## Installation
 
-Drop `alpaca-trading.skill` into your Downloads folder and run `Initialize-ClaudeSkills.ps1` to install. Restart Claude Desktop to load.
+Run the repo packer against this folder to rebuild `alpaca-trading.skill`, then install it with your normal Claude skill workflow.
