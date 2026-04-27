@@ -4,11 +4,11 @@ Claude AI skill definitions, custom behaviors, and automation workflows built fo
 
 ## Overview
 
-This repository contains a personal library of Claude skills, structured instruction sets that teach Claude how to behave in specific contexts. The repo currently includes 22 skills. Most skill folders include a source definition file such as `skill.md` or `SKILL.md` plus `README.md`, and some also include a packaged `.skill` or `skill.zip` artifact. Skills are installed into Claude Desktop and activate automatically when the right context is detected.
+This repository contains a personal library of Claude skills, structured instruction sets that teach Claude how to behave in specific contexts. The repo currently includes 25 skills plus one Claude Skills installer utility. Most skill folders include a source definition file such as `skill.md` or `SKILL.md` plus `README.md`, and some also include a packaged `.skill` or `skill.zip` artifact. Skills are installed into Claude Desktop and activate automatically when the right context is detected.
 
 All content in this repository is personal work. It is not sourced from, connected to, or representative of any employer systems, data, or internal processes.
 
-Skills are organized around four areas: **content creation**, **technical automation**, **infrastructure and project work**, and **travel planning**.
+Skills are organized around five areas: **content creation**, **technical automation**, **infrastructure and project work**, **fitness and tracking**, and **travel planning**.
 
 ---
 
@@ -21,9 +21,11 @@ Skills are organized around four areas: **content creation**, **technical automa
 | [blog-post](./Blog%20Post/README.md) | `blog post about...` | Writes posts for mickitblog.blogspot.com in Mick's exact voice, direct, first-person, problem-first, practitioner-focused |
 | [blog-to-social](./Blog%20To%20Social/README.md) | `bts` | Converts one finished blog post into ready-to-post Facebook, X, and LinkedIn versions in one pass |
 | [github-readme](./GitHub%20Readme/README.md) | `readme` or `gr` | Generates polished, complete README.md files for GitHub repos, tailored by repo type with correct section set and voice |
+| [github-repo-architect](./GitHub%20Repo%20Architect/README.md) | `repo`, `gra`, or `architect repo` | Converts project ideas into complete GitHub repository architecture with README, folder layout, prompts, CI pipeline, and starter templates |
 | [linkedin-post](./LinkedIn%20Post/README.md) | `linkedin post about...` | Writes professional LinkedIn posts for IT, AI, and automation audiences, polished but never corporate |
 | [facebook-post](./Facebook%20Post/README.md) | `fbp` | Writes Facebook posts, casual, first-person, no emojis, up to 6 relevant hashtags |
 | [facebook-reply](./Facebook%20Reply/README.md) | `fbr` | Writes replies to Facebook comments on existing posts |
+| [resume-writer](./resume-writer/README.md) | `rw` | Rewrites, audits, and improves resumes using a persistent recruiter and hiring manager principles library |
 | [x-post](./X%20Post/README.md) | `xp` | Writes X posts under 280 characters, no emojis, no em dashes, 2 to 3 hashtags |
 | [x-reply](./X%20Reply/README.md) | `xr` | Writes replies to X threads |
 | [website-content](./Website%20Content/README.md) | Context-based | Writes and updates personal website copy across all sections, bio, projects, skills, AI showcase, health/sports, SEO |
@@ -34,6 +36,7 @@ Skills are organized around four areas: **content creation**, **technical automa
 | --- | --- | --- |
 | [alpaca-trading](./Alpaca%20Trading/README.md) | Context-based | Builds and extends algorithmic trading scripts against the Alpaca API, PowerShell-first with mandatory live trading guards |
 | [crypto-listings](./Cryptolistings/README.md) | `cl` | Retrieves recent and upcoming crypto listings with source backed exchange data, UTC windows, and structured market briefs |
+| [crypto-research](./crypto%20research/README.md) | `cr` | Builds a source-backed due diligence report for one cryptocurrency before trading or investing |
 | [food-analyzer](./food-analyzer/README.md) | `fa` or `food` | Analyzes food photos, labels, and ingredient lists with macros, glycemic impact, NOVA processing score, timing fit, and medication interaction flags |
 | [n8n-workflow](./n8n%20Workflow/README.md) | Context-based | Designs n8n automation workflows with Proxmox, Claude API node config, and Cloudflare Tunnel patterns |
 | [pihole](./PiHole/README.md) | Context-based | Provides Pi-hole setup and administration guidance |
@@ -51,7 +54,7 @@ Skills are organized around four areas: **content creation**, **technical automa
 
 | Skill | Trigger | Description |
 | --- | --- | --- |
-| [fitness-log](./fitness/README.md) | `fit` or `workout` | Logs workout sessions, tracks PRs, and generates Facebook posts from training data |
+| [fitness-log](./Fitness/README.md) | `fit` or `workout` | Logs workout sessions, tracks PRs, and generates Facebook posts from training data |
 | [obsidian-workout-export](./Obsidian%20Workout%20Data/README.md) | `owd` | Exports workout data to Obsidian formatted Markdown |
 
 ### Travel Planning
@@ -100,6 +103,7 @@ Restart Claude Desktop to load.
 Anthropic/
 ├── README.md
 ├── PackSkill.ps1
+├── scripts/
 ├── Initialize Claude Skills/
 │   └── Initialize-ClaudeSkills.ps1
 ├── Alpaca Trading/
@@ -110,9 +114,9 @@ Anthropic/
 ├── Facebook Post/
 ├── Facebook Reply/
 ├── food-analyzer/
-├── fitness/
+├── Fitness/
+├── GitHub Repo Architect/
 ├── GitHub Readme/
-├── Home Assistant Automation/
 ├── LinkedIn Post/
 ├── n8n Workflow/
 ├── Obsidian Workout Data/
@@ -120,9 +124,11 @@ Anthropic/
 ├── PiHole Blocklist/
 ├── Proxmox LXC/
 ├── Rename Pictures/
+├── resume-writer/
 ├── Travel Itinerary/
 ├── TravelPlanning/
 ├── Website Content/
+├── crypto research/
 ├── X Post/
 └── X Reply/
 ```
